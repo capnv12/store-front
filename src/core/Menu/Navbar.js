@@ -2,20 +2,14 @@ import React from 'react'
 import {Link, withRouter} from 'react-router-dom'
 import styled from "styled-components";
 import { useSpring, animated, config } from "react-spring";
+import {signout} from '../../auth/index'
 
 import Logo from "./Logo";
 import BurgerMenu from "./BurgerMenu";
 import CollapseMenu from "./CollapseMenu";
 
-const isActive = (history, path) =>{
-    if(history.location.pathname === path){
-        return {color:"red"}
-    }else{
-        return {color:"blue"}
-    }
-}
 
-const Navbar = ({ navbarState, handleNavbar}) => {
+const Navbar = ({ navbarState, handleNavbar, history }) => {
   const barAnimation = useSpring({
     from: { transform: 'translate3d(0, -10rem, 0)' },
     transform: 'translate3d(0, 0, 0)',
@@ -28,6 +22,8 @@ const Navbar = ({ navbarState, handleNavbar}) => {
     config: config.wobbly,
   });
 
+
+
   return (
     <>
       <NavBar style={barAnimation}>
@@ -36,6 +32,9 @@ const Navbar = ({ navbarState, handleNavbar}) => {
           <NavLinks style={linkAnimation}>
             <Link  to="/logare">Logare</Link>
             <Link  to="/inregistrare">Inregistrare</Link>
+            <span onClick={() => signout(() => {
+               history.push("/");
+            })}>Dezautentificare</span>
           </NavLinks>
           <BurgerWrapper>
             <BurgerMenu
@@ -53,7 +52,7 @@ const Navbar = ({ navbarState, handleNavbar}) => {
   )
 }
 
-export default Navbar
+export default withRouter(Navbar)
 
 const NavBar = styled(animated.nav)`
   position: relative;
