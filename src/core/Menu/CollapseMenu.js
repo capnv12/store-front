@@ -1,6 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
+import {Link, withRouter} from 'react-router-dom'
 import { useSpring, animated } from 'react-spring';
+import {signout, isAuthenticated} from '../../auth/index'
 
 const CollapseMenu = (props) => {
     const { open } = useSpring({ open: props.navbarState ? 0 : 1 });
@@ -15,10 +17,17 @@ const CollapseMenu = (props) => {
         }}
         >
           <NavLinks>
-            <li><a href="/" onClick={props.handleNavbar}>link n1</a></li>
-            <li><a href="/" onClick={props.handleNavbar}>link n2</a></li>
-            <li><a href="/" onClick={props.handleNavbar}>link n3</a></li>
-            <li><a href="/" onClick={props.handleNavbar}>link n4</a></li>
+            {!isAuthenticated() && (
+              <div>
+                <li><Link  to="/logare">Logare</Link></li>
+                <li><Link  to="/inregistrare">Inregistrare</Link></li>
+              </div>
+            )}
+            {isAuthenticated() && (
+              <Span onClick={() => signout(() => {
+                props.history.push("/");
+              })}>Dezautentificare</Span>
+            )}
           </NavLinks>
         </CollapseWrapper>
       );
@@ -26,7 +35,7 @@ const CollapseMenu = (props) => {
     return null;
   };
 
-  export default CollapseMenu;
+  export default withRouter(CollapseMenu);
 
   const CollapseWrapper = styled(animated.div)`
     background: #fff;
@@ -57,4 +66,15 @@ const CollapseMenu = (props) => {
       }
     }
   `;
+  const Span = styled.span`
+    font-size: 1rem;
+    line-height: 2;
+    color: #333;
+    text-decoration: none;
+    cursor: pointer;
+    &:hover {
+      color: #fdcb6e;
+      border-bottom: 1px solid #fdcb6e;
+    }
+  `
 

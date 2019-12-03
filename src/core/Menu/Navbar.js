@@ -2,7 +2,7 @@ import React from 'react'
 import {Link, withRouter} from 'react-router-dom'
 import styled from "styled-components";
 import { useSpring, animated, config } from "react-spring";
-import {signout} from '../../auth/index'
+import {signout, isAuthenticated} from '../../auth/index'
 
 import Logo from "./Logo";
 import BurgerMenu from "./BurgerMenu";
@@ -30,11 +30,17 @@ const Navbar = ({ navbarState, handleNavbar, history }) => {
         <FlexContainer>
         <Link  to="/"><Logo /></Link>
           <NavLinks style={linkAnimation}>
-            <Link  to="/logare">Logare</Link>
-            <Link  to="/inregistrare">Inregistrare</Link>
-            <span onClick={() => signout(() => {
-               history.push("/");
-            })}>Dezautentificare</span>
+            {!isAuthenticated() && (
+              <div>
+                <Link  to="/logare">Logare</Link>
+                <Link  to="/inregistrare">Inregistrare</Link>
+              </div>
+            )}
+            {isAuthenticated() && (
+              <Span onClick={() => signout(() => {
+                history.push("/");
+              })}>Dezautentificare</Span>
+            )}
           </NavLinks>
           <BurgerWrapper>
             <BurgerMenu
@@ -89,6 +95,7 @@ const NavLinks = styled(animated.ul)`
     padding:21px 0 0;
 
 
+
     &:hover {
         color: #333;
         border-bottom: 2px solid #207abd;
@@ -99,7 +106,24 @@ const NavLinks = styled(animated.ul)`
     }
   }
 `;
+const Span = styled.span`
+color: #333;
+font-weight: 600;
+border-bottom: 2px solid transparent;
+margin: 0 1.5rem;
+transition: all linear 0.2s;
+text-decoration: none;
+cursor: pointer;
+padding:21px 0 0;
+&:hover {
+  color: #333;
+  border-bottom: 2px solid #207abd;
+}
 
+@media (max-width: 768px) {
+display: none;
+}
+`
 const BurgerWrapper = styled.div`
   margin: auto 0;
 

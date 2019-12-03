@@ -49,7 +49,7 @@ const Signin = () => {
                     </div>
                     <Button onClick={clickSubmit} type="submit" className="btn-block">Logare</Button>
                     <TextCenter>Nu esti inca inregistrat?</TextCenter>
-                    <Link to="/logare"><SilentButton>Inregistrare</SilentButton></Link>
+                    <Link to="/logare"><SilentButton className="btn-block">Inregistreaza-te</SilentButton></Link>
                 </form>
             </FormContainer>
         )
@@ -152,18 +152,10 @@ font-size: 30px;
     font-weight: 300;
     margin-bottom: 30px;
 `
-const CustomControl = styled.div`
-    position: relative;
-    display: block;
-    min-height: 1.5rem;
-    padding-left: 1.5rem;
-`
 const Button = styled.button`
-transition: all .3s;
 text-transform: uppercase;
 text-align: center;
 border-radius: 2px;
-padding: 0 50px;
 background: #fff;
 color: #ccc;
 height: 48px;
@@ -182,13 +174,12 @@ transition: all .3s;
 text-transform: uppercase;
 text-align: center;
 border-radius: 2px;
-padding: 0 50px;
 background: #fff;
 color: #ccc;
 height: 48px;
 line-height: 48px;
 border: 1px solid #ccc;
-font-size: 16px;
+font-size: 14px;
 cursor: pointer;
 text-decoration: none;
 margin-right: 1rem;

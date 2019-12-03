@@ -62,7 +62,7 @@ const Signup = () => {
 
                     <Button onClick={clickSubmit} type="submit" className="btn-block">Inregistrare</Button>
                     <TextCenter>Esti deja inregistrat?</TextCenter>
-                    <Link to="/logare"><SilentButton>Logheaza-te</SilentButton></Link>
+                    <Link to="/logare"><SilentButton className="btn-block">Logheaza-te</SilentButton></Link>
                 </form>
             </FormContainer>
         )
@@ -105,11 +105,14 @@ const Wrapper = styled.div`
 height: 100%;
 padding: 0;
 min-height: 100%;
-position: fixed;
+position: absolute;
 left: 0;
 right: 0;
 background-color: #eee;
 padding-top:60px
+@media (max-width: 768px) {
+    padding-top:15px;
+  }
 
 `
 const MainContainer = styled.div`
@@ -136,6 +139,10 @@ const Left = styled.div`
 background-image: url(${login01});
 background-size: cover;
 background-position: 50% 50%;
+@media (max-width: 1000px){
+    display:block;
+    height: 80px;
+}
 `
 const Right = styled.div`
 `
@@ -143,6 +150,7 @@ const FormContainer = styled.div`
 width: 50%;
 margin: 0 auto;
 padding: 30px 0;
+
 `
 const TextCenter = styled.div`
 text-align: center!important;
@@ -164,11 +172,9 @@ const CustomControl = styled.div`
     padding-left: 1.5rem;
 `
 const Button = styled.button`
-transition: all .3s;
 text-transform: uppercase;
 text-align: center;
 border-radius: 2px;
-padding: 0 50px;
 background: #fff;
 color: #ccc;
 height: 48px;
@@ -183,17 +189,15 @@ color: #fff;
     border-color: #207abd;
 `
 const SilentButton = styled.div`
-transition: all .3s;
 text-transform: uppercase;
 text-align: center;
 border-radius: 2px;
-padding: 0 50px;
 background: #fff;
 color: #ccc;
 height: 48px;
 line-height: 48px;
 border: 1px solid #ccc;
-font-size: 16px;
+font-size: 14px;
 cursor: pointer;
 text-decoration: none;
 margin-right: 1rem;
