@@ -17,7 +17,14 @@ const GlobalStyles = createGlobalStyle`
 
   body {
     box-sizing: border-box;
-    font-family: 'Montserrat', sans-serif;
+    font-family: Open Sans,Helvetica,Arial,Hiragino Sans GB,Microsoft YaHei,WenQuanYi Micro Hei,sans-serif;
+    font-size: 100%;
+    line-height: 1.4;
+    color: #333;
+    background-color: #f7f8f9;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
   }
 `;
 

@@ -37,10 +37,11 @@ const Navbar = ({ navbarState, handleNavbar, history }) => {
               </div>
             )}
             {isAuthenticated() && (
-              <Span onClick={() => signout(() => {
-                history.push("/");
-              })}>Dezautentificare</Span>
-            )}
+              <div>
+                <Link  to="/cont">Cont</Link>
+                <Span onClick={() => signout(() => {history.push("/");})}>Dezautentificare</Span>
+              </div>
+                )}
           </NavLinks>
           <BurgerWrapper>
             <BurgerMenu
