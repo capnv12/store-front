@@ -1,7 +1,7 @@
 import React from 'react'
 import Menu from './Menu'
 
-const Layout = ({title = 'titlu',children,className}) => {
+const BasicLayout = ({title = 'titlu',children,className}) => {
     return(
         <div>
             <Menu/>
@@ -15,4 +15,4 @@ const Layout = ({title = 'titlu',children,className}) => {
     )
 }
 
-export default Layout
+export default BasicLayout

@@ -36,9 +36,17 @@ const Navbar = ({ navbarState, handleNavbar, history }) => {
                 <Link  to="/inregistrare">Inregistrare</Link>
               </div>
             )}
-            {isAuthenticated() && (
+
+            {isAuthenticated() && isAuthenticated().user.role === 1 && (
               <div>
                 <Link  to="/cont">Cont</Link>
+                <Span onClick={() => signout(() => {history.push("/");})}>Dezautentificare</Span>
+              </div>
+                )}
+
+            {isAuthenticated() && isAuthenticated().user.role === 0 && (
+              <div>
+                <Link  to="/cont-admin">Cont</Link>
                 <Span onClick={() => signout(() => {history.push("/");})}>Dezautentificare</Span>
               </div>
                 )}

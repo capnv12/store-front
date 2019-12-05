@@ -72,7 +72,7 @@ const Signup = () => {
         return <div className="alert alert-danger" style={{display:error ? '' : 'none'}}>{error}</div>
     }
     const showSucces = () =>{
-        return <div className="alert alert-info" style={{display:success ? '' : 'none'}}>New account created. Please <Link to='/signin'>signin</Link></div>
+        return <div className="alert alert-info" style={{display:success ? '' : 'none'}}>Contul nou a fost creat. Te rugam <Link to='/signin'>logheaza-te</Link></div>
     }
 
     return(

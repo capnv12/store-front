@@ -1,7 +1,7 @@
 import React, {useState} from 'react'
 import styled from 'styled-components';
 import {Link, Redirect} from 'react-router-dom'
-import {signin, authenticate} from '../auth/'
+import {signin, authenticate, isAuthenticated} from '../auth/'
 import login01 from '../assets/login01.jpg'
 import Logo from "../core/Menu/Logo";
 
@@ -15,6 +15,7 @@ const Signin = () => {
     })
 
     const {email, password, error, loading, redirectToReferrer} = values
+    const {user} = isAuthenticated()
 
     const handleChange = name => event => {
         setValues({...values, error: false, [name]: event.target.value})
@@ -64,6 +65,13 @@ const Signin = () => {
 
     const redirectUser = () => {
         if(redirectToReferrer){
+            if(user && user.role === 0 ){
+                return <Redirect to="/cont-admin" />
+            }else {
+                return <Redirect to="/cont" />
+            }
+        }
+        if(isAuthenticated()){
             return <Redirect to="/" />
         }
     }
