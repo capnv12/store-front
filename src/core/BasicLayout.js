@@ -1,10 +1,8 @@
 import React from 'react'
-import Menu from './Menu'
 
 const BasicLayout = ({title = 'titlu',children,className}) => {
     return(
         <div>
-            <Menu/>
             <div className="jumbotron">
                 <h2>{title}</h2>
             </div>

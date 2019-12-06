@@ -11,11 +11,10 @@ const Signup = () => {
         password:'',
         confirmPassword:'',
         error:'',
-        checkbox:'',
         success: false
     })
 
-    const {email, password,confirmPassword, checkbox, success, error} = values
+    const {email, password,confirmPassword,success, error} = values
 
     const handleChange = name => event => {
         setValues({...values, error: false, [name]: event.target.value})
@@ -23,13 +22,13 @@ const Signup = () => {
 
     const clickSubmit = event => {
         event.preventDefault()
-        setValues({...values, error:false, checkbox:false, success:true})
+        setValues({...values, error:false, success:true})
         signup({email,password})
         .then(data => {
             if(data.error) {
-                setValues({...values, error: data.error,checkbox:false, success:false})
+                setValues({...values, error: data.error, success:false})
             }else{
-                setValues({...values, email:'', password:'', confirmPassword:'', error:'', success:true})
+                setValues({...values, email:'', password:'', confirmPassword:'',checkbox:'', error:'', success:true})
             }
         })
     }
