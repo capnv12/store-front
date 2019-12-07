@@ -50,7 +50,7 @@ export const createProduct = (userId, token, product) => {
     })
 }
 export const getCategories = () => {
-    return fetch (`${API}/categorii`,{
+    return fetch (`${API}/categorii/`,{
         method:"GET"
     })
     .then(response => {
@@ -61,7 +61,7 @@ export const getCategories = () => {
     })
 }
 export const getSubCategories = () => {
-    return fetch (`${API}/sub-categorii`,{
+    return fetch (`${API}/sub-categorii/`,{
         method:"GET"
     })
     .then(response => {

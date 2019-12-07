@@ -48,7 +48,7 @@ const AddCategory = () => {
     const goBack = () => {
         return(
             <div className="mt-5">
-                <Button><StyledNavLink to="/cont-admin">Inapoi la Dashboard</StyledNavLink></Button>
+                <StyledNavLink to="/cont-admin"><Button>Inapoi la Dashboard</Button></StyledNavLink>
             </div>
         )
     }

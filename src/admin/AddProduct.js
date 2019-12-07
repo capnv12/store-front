@@ -4,16 +4,18 @@ import Layout from '../core/Layout'
 import BasicLayout from '../core/BasicLayout'
 import {NavLink} from 'react-router-dom'
 import {isAuthenticated} from '../auth/index'
-import {createProduct} from './apiAdmin'
+import {createProduct,getSubCategories} from './apiAdmin'
+
+import TinyMCE from 'react-tinymce';
 
 const AddProduct = () => {
 
     const [values, setValues] = useState({
         nume:'',
         descriere:'',
+        descriereScurta:'',
         brand:'',
-        categorie:[],
-        categorii:'',
+        categorii:[],
         pret:'',
         pretRedus:'',
         SKU:'',
@@ -33,8 +35,8 @@ const AddProduct = () => {
     const {user, token} =isAuthenticated()
     const {nume,
     descriere,
+    descriereScurta,
     brand,
-    categorie,
     categorii,
     pret,
     pretRedus,
@@ -50,9 +52,19 @@ const AddProduct = () => {
     createdProduct,
     redirectToProfile,
     formData} = values
+    
+    const init = () => {
+        getSubCategories().then(data=> {
+            if(data.error) {
+                setValues({...values, error:data.error})
+            }else{
+                setValues({...values, categorii:data, formData:new FormData()})
+            }
+        })
+    }
 
     useEffect(() => {
-        setValues({...values, formData:new FormData()})
+        init()
     },[])
 
     const handleChange = nume => event => {
@@ -71,8 +83,9 @@ const AddProduct = () => {
                 }else{
                     setValues({...values, nume:'',
                     descriere:'',
+                    descriereScurta:'',
                     brand:'',
-                    categorie:'',
+                    categorii:'',
                     categorii:'',
                     pret:'',
                     pretRedus:'',
@@ -106,7 +119,25 @@ const AddProduct = () => {
                 </div>
                 <div className="form-group">
                     <label className="text-muted">Descriere</label>
-                    <textarea onChange={handleChange('descriere')} className="form-control" value={descriere}/>
+                    <TinyMCE
+                     content="<p>This is the initial content of the editor</p>"
+                     config={{
+                       plugins: 'autolink link image lists print preview',
+                       toolbar: 'undo redo | formatselect | bullist numlist outdent indent | bold italic | alignleft aligncenter alignright'
+                     }}
+                    onChange={handleChange('descriere')} className="form-control" value={descriere}
+                    />
+                </div>
+                <div className="form-group">
+                    <label className="text-muted">Descriere Scurta</label>
+                    <TinyMCE
+                     content="<p>This is the initial content of the editor</p>"
+                     config={{
+                       plugins: 'autolink link image lists print preview',
+                       toolbar: 'undo redo | formatselect | bullist numlist outdent indent | bold italic | alignleft aligncenter alignright'
+                     }}
+                    onChange={handleChange('descriereScurta')} className="form-control" value={descriereScurta}
+                    />
                 </div>
                 <div className="form-group">
                     <label className="text-muted">Brand</label>
@@ -115,9 +146,12 @@ const AddProduct = () => {
                 <div className="form-group">
                     <label className="text-muted">Categorie</label>
                     <select onChange={handleChange('categorie')} className="form-control">
-                        <option value="5ddfd425a92cef4c104bdf2c">Drone</option>
-                        <option value="5ddfd425a92cef4c104bdf2c">FPV Racing</option>
-                        <option value="5ddfd425a92cef4c104bdf2c">Piese</option>
+                        <option>Alege categorie</option>
+                        {categorii && categorii.map((c,i) => {
+                            return(
+                                <option key={i} value={c._id}>{c.nume}</option>
+                            )
+                        })}
                     </select>
                 </div>
                 <div className="form-group">
@@ -135,6 +169,7 @@ const AddProduct = () => {
                 <div className="form-group">
                     <label className="text-muted">In stoc</label>
                     <select onChange={handleChange('inStoc')} className="form-control">
+                        <option>Alege categorie</option>
                         <option value="1">Da</option>
                         <option value="0">Nu</option>
                     </select>
@@ -149,16 +184,51 @@ const AddProduct = () => {
                 </div>
                 <div className="form-group">
                     <label className="text-muted">Specificatii</label>
-                    <textarea onChange={handleChange('specificatii')} className="form-control" value={specificatii}/>
+                    <TinyMCE
+                     content="<p>This is the initial content of the editor</p>"
+                     config={{
+                       plugins: 'autolink link image lists print preview',
+                       toolbar: 'undo redo | formatselect | bullist numlist outdent indent | bold italic | alignleft aligncenter alignright'
+                     }} onChange={handleChange('specificatii')} className="form-control" value={specificatii}/>
                 </div>
                 <div className="form-group">
                     <label className="text-muted">In the Box</label>
-                    <textarea onChange={handleChange('inTheBox')} className="form-control" value={inTheBox}/>
+                    <TinyMCE
+                     content="<p>This is the initial content of the editor</p>"
+                     config={{
+                       plugins: 'autolink link image lists print preview',
+                       toolbar: 'undo redo | formatselect | bullist numlist outdent indent | bold italic | alignleft aligncenter alignright'
+                     }}onChange={handleChange('inTheBox')} className="form-control" value={inTheBox}/>
                 </div>
-                <Button type="submit" className="btn btn-outline-primary ">Creare Categorie</Button>
+                <Button type="submit" className="btn btn-outline-primary ">Creare Produs</Button>
             </form>
         )
     }
+    const showError = () => (
+        <div className="alert alert-danger" style={{ display: error ? '' : 'none' }}>
+            {error}
+        </div>
+    );
+
+    const showSuccess = () => (
+        <div className="alert alert-info" style={{ display: createdProduct ? '' : 'none' }}>
+            <h2>{`Produsul ${createdProduct} a fost creat`} </h2>
+        </div>
+    );
+
+    const showLoading = () =>
+        loading && (
+            <div className="alert alert-success">
+                <h2>Loading...</h2>
+            </div>
+        );
+        const goBack = () => {
+            return(
+                <div className="mt-5">
+                    <StyledNavLink to="/cont-admin"><Button>Inapoi la Dashboard</Button></StyledNavLink>
+                </div>
+            )
+        }
 
     return (
         <Layout>
@@ -166,6 +236,11 @@ const AddProduct = () => {
                 <div className="row">
                     <div className="col-md-6 offset-md-2">
                         {newProductForm()}
+                        {goBack()}
+                        {showError()}
+                {showSuccess()}
+                {showLoading()}
+
                     </div>
                 </div>
             </BasicLayout>
@@ -175,17 +250,17 @@ const AddProduct = () => {
 
 export default AddProduct
 
-// const StyledNavLink = styled(NavLink)`
-// color: #fff;
-// font-size: .815384em;
-// text-decoration: none;
+const StyledNavLink = styled(NavLink)`
+color: #fff;
+font-size: .815384em;
+text-decoration: none;
 
-// &:hover {
-//     color: #fff;
-//     text-decoration: none;
+&:hover {
+    color: #fff;
+    text-decoration: none;
 
-// }
-// `
+}
+`
 const Button = styled.button`
 text-transform: uppercase;
 width:300px;

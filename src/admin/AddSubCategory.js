@@ -4,13 +4,13 @@ import Layout from '../core/Layout'
 import BasicLayout from '../core/BasicLayout'
 import {NavLink} from 'react-router-dom'
 import {isAuthenticated} from '../auth/index'
-import {createProduct, getCategories} from './apiAdmin'
+import {createSubCategory, getCategories} from './apiAdmin'
 
 const AddSubCategory = () => {
 
     const [values, setValues] = useState({
         nume:'',
-        categorie:[],
+        categorii:[],
         loading:false,
         error:'',
         createdSubCategory: '',
@@ -21,7 +21,7 @@ const AddSubCategory = () => {
     const {user, token} =isAuthenticated()
     const {
         nume,
-        categorie,
+        categorii,
         loading,
         error,
         createdSubCategory,
@@ -31,11 +31,11 @@ const AddSubCategory = () => {
         //load categories and set form data
 
         const init = () => {
-            getCategories().then(data => {
-                if (data.error){
+            getCategories().then(data=> {
+                if(data.error) {
                     setValues({...values, error:data.error})
                 }else{
-                    setValues({...values, categorie:data, formData:new FormData()})
+                    setValues({...values, categorii:data, formData:new FormData()})
                 }
             })
         }
@@ -53,7 +53,7 @@ const AddSubCategory = () => {
         const clickSubmit = (event) => {
             event.preventDefault()
             setValues({...values, error:'',loading:true})
-            createProduct(user._id, token, formData)
+            createSubCategory(user._id, token, formData)
                 .then(data => {
                     if(data.error){
                         setValues({...values, error:data.error})
@@ -76,14 +76,13 @@ const AddSubCategory = () => {
                     <div className="form-group">
                         <label className="text-muted">Categorie</label>
                         <select onChange={handleChange('categorie')} className="form-control">
-                            <option>Alege o categorie</option>
-                            {categorie &&
-                        categorie.map((c, i) => (
-                            <option key={i} value={c._id}>
-                                {c.nume}
-                            </option>
-                        ))}
-                        </select>
+                        <option>Alege categorie</option>
+                        {categorii && categorii.map((c,i) => {
+                            return(
+                                <option key={i} value={c._id}>{c.nume}</option>
+                            )
+                        })}
+                    </select>
                 </div>
                 <Button type="submit" className="btn btn-outline-primary ">Creare Categorie</Button>
                 </form>
@@ -92,10 +91,28 @@ const AddSubCategory = () => {
         const goBack = () => {
             return(
                 <div className="mt-5">
-                    <Button><StyledNavLink to="/cont-admin">Inapoi la Dashboard</StyledNavLink></Button>
+                    <StyledNavLink to="/cont-admin"><Button>Inapoi la Dashboard</Button></StyledNavLink>
                 </div>
             )
         }
+        const showError = () => (
+            <div className="alert alert-danger" style={{ display: error ? '' : 'none' }}>
+                {error}
+            </div>
+        );
+    
+        const showSuccess = () => (
+            <div className="alert alert-info" style={{ display: createdSubCategory ? '' : 'none' }}>
+                <h2>{` Subcategoria ${createdSubCategory} a fost creata`} </h2>
+            </div>
+        );
+    
+        const showLoading = () =>
+            loading && (
+                <div className="alert alert-success">
+                    <h2>Loading...</h2>
+                </div>
+            );
 
         return (
             <Layout>
@@ -104,6 +121,9 @@ const AddSubCategory = () => {
                         <div className="col-md-6 offset-md-2">
                             {newSubCategoryForm()}
                             {goBack()}
+                            {showError()}
+                {showSuccess()}
+                {showLoading()}
                         </div>
                     </div>
                 </BasicLayout>
