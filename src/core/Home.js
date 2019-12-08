@@ -12,44 +12,44 @@ const Home = () => {
     const [singleProduct, setSingleProduct] =useState([])
     const [error, setError] =useState(false)
 
-    const loadProductsBySell = () => {
-        getProducts('sold').then(data => {
-            if(data.error) {
-                setError(data.error)
-            }
-            else{
-                setProductsBySell(data)
-            }
-        })    
+    // const loadProductsBySell = () => {
+    //     getProducts('sold').then(data => {
+    //         if(data.error) {
+    //             setError(data.error)
+    //         }
+    //         else{
+    //             setProductsBySell(data)
+    //         }
+    //     })    
     
-    }
-    const loadProductsByArrival = () => {
-        getProducts('createdAt').then(data => {
-            if(data.error) {
-                setError(data.error)
-            }
-            else{
-                setProductsByArrival(data)
-            }
-        })    
+    // }
+    // const loadProductsByArrival = () => {
+    //     getProducts('createdAt').then(data => {
+    //         if(data.error) {
+    //             setError(data.error)
+    //         }
+    //         else{
+    //             setProductsByArrival(data)
+    //         }
+    //     })    
     
-    }
+    // }
 
-    const loadSingleProduct = () =>{
-        getSingleProduct('5deaa98bdf78c50a287fe625').then(data => {
-            if(data.error) {
-                setError(data.error)
-            }
-            else{
-                setSingleProduct(data)
-            }
-        }) 
-    }
+    // const loadSingleProduct = () =>{
+    //     getSingleProduct('5deaa98bdf78c50a287fe625').then(data => {
+    //         if(data.error) {
+    //             setError(data.error)
+    //         }
+    //         else{
+    //             setSingleProduct(data)
+    //         }
+    //     }) 
+    // }
 
     useEffect(() => {
-        loadProductsBySell()
-        loadProductsByArrival()
-        loadSingleProduct()
+        // loadProductsBySell()
+        // loadProductsByArrival()
+        // loadSingleProduct()
     },[])
 
     return(

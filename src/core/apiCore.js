@@ -11,15 +11,28 @@ export const getProducts = (sortBy) => {
         return console.log(err)
     })
 }
-
-export const getSingleProduct = (productId) => {
-    return fetch(`${API}/produs/${productId}`, {
+export const getProduct = (productId) => {
+    return fetch (`${API}/produs/${productId}`,{
         method:"GET"
     })
     .then(response => {
         return response.json()
+       
     })
-    .catch(err => {
-        return console.log(err)
+    .catch(error =>{
+        return console.log(error)
     })
+    
 }
+
+// export const getSingleProduct = (productId) => {
+//     return fetch(`${API}/produs/${productId}/`, {
+//         method:"GET"
+//     })
+//     .then(response => {
+//         return response.json()
+//     })
+//     .catch(err => {
+//         return console.log(err)
+//     })
+// }

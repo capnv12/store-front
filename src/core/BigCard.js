@@ -1,11 +1,11 @@
 import React from 'react'
 import {Link} from 'react-router-dom'
-import ShowImage from './ShowImage'
 import styled from 'styled-components'
+import ShowImage from './ShowImage'
 
 const BigCard = ({product}) => {
 
-    const isRedused = () => {
+    const isReduced = () => {
         if(product.pretRedus){
             return(
                 <P>{product.pretRedus} de la <span style={{textDecoration: 'line-through'}}>{product.pret}</span></P>
@@ -19,10 +19,10 @@ const BigCard = ({product}) => {
         <Wrapper className="col-md-6 col-lg-4">
             <ListItem>
                 <StyledLink to="/">
-                    <ShowImage item={product} url="produse"/>
+                    <ShowImage item={product} url="produs"/>
                     <H4>{product.nume}</H4>
                     <Desc>{product.descriereScurta}</Desc>
-                    {isRedused()}
+                    {isReduced()}
                 </StyledLink>
 
             </ListItem>

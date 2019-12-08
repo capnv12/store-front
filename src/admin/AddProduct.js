@@ -6,12 +6,15 @@ import {NavLink} from 'react-router-dom'
 import {isAuthenticated} from '../auth/index'
 import {createProduct,getSubCategories} from './apiAdmin'
 
-import TinyMCE from 'react-tinymce';
+// import TinyMCE from 'react-tinymce';
+// import { Editor } from '@tinymce/tinymce-react';
+
 
 const AddProduct = () => {
 
     const [values, setValues] = useState({
         nume:'',
+        subtitlu:'',
         descriere:'',
         descriereScurta:'',
         brand:'',
@@ -34,6 +37,7 @@ const AddProduct = () => {
 
     const {user, token} =isAuthenticated()
     const {nume,
+    subtitlu,
     descriere,
     descriereScurta,
     brand,
@@ -71,6 +75,7 @@ const AddProduct = () => {
         const value = nume === 'photo' ? event.target.files[0] : event.target.value;
         formData.set(nume, value);
         setValues({ ...values, [nume]: value });
+        console.log(event.target)
     };
 
     const clickSubmit = (event) => {
@@ -82,6 +87,7 @@ const AddProduct = () => {
                     setValues({...values, error:data.error})
                 }else{
                     setValues({...values, nume:'',
+                    subtitlu:'',
                     descriere:'',
                     descriereScurta:'',
                     brand:'',
@@ -118,25 +124,17 @@ const AddProduct = () => {
                     <input onChange={handleChange('nume')} type="text" className="form-control" value={nume}/>
                 </div>
                 <div className="form-group">
+                    <label className="text-muted">Subtitlu</label>
+                    <input onChange={handleChange('subtitlu')} type="text" className="form-control" value={subtitlu}/>
+                </div>
+                <div className="form-group">
                     <label className="text-muted">Descriere</label>
-                    <TinyMCE
-                     content="<p>This is the initial content of the editor</p>"
-                     config={{
-                       plugins: 'autolink link image lists print preview',
-                       toolbar: 'undo redo | formatselect | bullist numlist outdent indent | bold italic | alignleft aligncenter alignright'
-                     }}
-                    onChange={handleChange('descriere')} className="form-control" value={descriere}
+                    <textarea onChange={handleChange('descriere')} className="form-control" value={descriere}
                     />
                 </div>
                 <div className="form-group">
                     <label className="text-muted">Descriere Scurta</label>
-                    <TinyMCE
-                     content="<p>This is the initial content of the editor</p>"
-                     config={{
-                       plugins: 'autolink link image lists print preview',
-                       toolbar: 'undo redo | formatselect | bullist numlist outdent indent | bold italic | alignleft aligncenter alignright'
-                     }}
-                    onChange={handleChange('descriereScurta')} className="form-control" value={descriereScurta}
+                    <textarea onChange={handleChange('descriereScurta')} className="form-control" value={descriereScurta}
                     />
                 </div>
                 <div className="form-group">
@@ -184,21 +182,11 @@ const AddProduct = () => {
                 </div>
                 <div className="form-group">
                     <label className="text-muted">Specificatii</label>
-                    <TinyMCE
-                     content="<p>This is the initial content of the editor</p>"
-                     config={{
-                       plugins: 'autolink link image lists print preview',
-                       toolbar: 'undo redo | formatselect | bullist numlist outdent indent | bold italic | alignleft aligncenter alignright'
-                     }} onChange={handleChange('specificatii')} className="form-control" value={specificatii}/>
+                    <textarea onChange={handleChange('specificatii')} className="form-control" value={specificatii}/>
                 </div>
                 <div className="form-group">
                     <label className="text-muted">In the Box</label>
-                    <TinyMCE
-                     content="<p>This is the initial content of the editor</p>"
-                     config={{
-                       plugins: 'autolink link image lists print preview',
-                       toolbar: 'undo redo | formatselect | bullist numlist outdent indent | bold italic | alignleft aligncenter alignright'
-                     }}onChange={handleChange('inTheBox')} className="form-control" value={inTheBox}/>
+                    <textarea onChange={handleChange('inTheBox')} className="form-control" value={inTheBox}/>
                 </div>
                 <Button type="submit" className="btn btn-outline-primary ">Creare Produs</Button>
             </form>
@@ -229,7 +217,7 @@ const AddProduct = () => {
                 </div>
             )
         }
-
+ 
     return (
         <Layout>
             <BasicLayout title="Creare Produs">
@@ -240,7 +228,7 @@ const AddProduct = () => {
                         {showError()}
                 {showSuccess()}
                 {showLoading()}
-
+                    
                     </div>
                 </div>
             </BasicLayout>
