@@ -28,6 +28,7 @@ const AddProduct = () => {
         specificatii:'',
         inTheBox:'',
         photo:'',
+        inregistrare:'',
         loading:false,
         error:'',
         createdProduct: '',
@@ -45,18 +46,19 @@ const AddProduct = () => {
     pret,
     pretRedus,
     SKU,
-    inStoc,
+    // inStoc,
     cantitate,
     tipProdus,
     specificatii,
     inTheBox,
-    photo,
+    inregistrare,
+    // photo,
     loading,
     error,
     createdProduct,
-    redirectToProfile,
+    // redirectToProfile,
     formData} = values
-    
+
     const init = () => {
         getSubCategories().then(data=> {
             if(data.error) {
@@ -92,7 +94,6 @@ const AddProduct = () => {
                     descriereScurta:'',
                     brand:'',
                     categorii:'',
-                    categorii:'',
                     pret:'',
                     pretRedus:'',
                     SKU:'',
@@ -101,6 +102,7 @@ const AddProduct = () => {
                     tipProdus:'',
                     specificatii:'',
                     inTheBox:'',
+                    inregistrare:'',
                     photo:'',
                     loading:false,
                     createdProduct:data.nume })
@@ -167,7 +169,15 @@ const AddProduct = () => {
                 <div className="form-group">
                     <label className="text-muted">In stoc</label>
                     <select onChange={handleChange('inStoc')} className="form-control">
-                        <option>Alege categorie</option>
+                        <option>In stoc?</option>
+                        <option value="1">Da</option>
+                        <option value="0">Nu</option>
+                    </select>
+                </div>
+                <div className="form-group">
+                    <label className="text-muted">Inregistrare</label>
+                    <select onChange={handleChange('inregistrare')} className="form-control">
+                        <option>Necesita inregistrare?</option>
                         <option value="1">Da</option>
                         <option value="0">Nu</option>
                     </select>
@@ -217,7 +227,7 @@ const AddProduct = () => {
                 </div>
             )
         }
- 
+
     return (
         <Layout>
             <BasicLayout title="Creare Produs">
@@ -228,7 +238,7 @@ const AddProduct = () => {
                         {showError()}
                 {showSuccess()}
                 {showLoading()}
-                    
+
                     </div>
                 </div>
             </BasicLayout>

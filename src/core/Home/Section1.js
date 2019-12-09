@@ -11,34 +11,34 @@ const Section1 = () => {
     const [error, setError] =useState(false)
 
     const loadProduct1 = () =>{
-        getProduct('5dec24bde89df82f67f82ff5').then(data => {
+        getProduct('5dedf75ecb14b5280850c248').then(data => {
             if(data.error) {
                 setError(data.error)
             }
             else{
                 setSingleProduct1(data)
             }
-        }) 
+        })
     }
     const loadProduct2 = () =>{
-        getProduct('5deba1b9df78c50a287fe629').then(data => {
+        getProduct('5dedf75ecb14b5280850c248').then(data => {
             if(data.error) {
                 setError(data.error)
             }
             else{
                 setSingleProduct2(data)
             }
-        }) 
+        })
     }
     const loadProduct3 = () =>{
-        getProduct('5deaaa47df78c50a287fe626').then(data => {
+        getProduct('5dedf75ecb14b5280850c248').then(data => {
             if(data.error) {
                 setError(data.error)
             }
             else{
                 setSingleProduct3(data)
             }
-        }) 
+        })
     }
 
     const errorFound = () =>{
@@ -52,18 +52,16 @@ const Section1 = () => {
         loadProduct3()
     },[])
 
+    console.log(errorFound)
 
-    
     return(
-        <Wrapper className="container text-center">
+            <Wrapper className="container text-center">
             <div className="row justify-content-center">
                 <BigCard product={singleProduct1}/>
                 <BigCard product={singleProduct2}/>
                 <BigCard product={singleProduct3}/>
-
             </div>
-        </Wrapper>               
-  
+            </Wrapper >
     )
 }
 export default Section1

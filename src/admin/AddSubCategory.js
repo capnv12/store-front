@@ -14,7 +14,7 @@ const AddSubCategory = () => {
         loading:false,
         error:'',
         createdSubCategory: '',
-        redirectToProfile: false,
+        // redirectToProfile: false,
         formData: ''
     });
 
@@ -25,7 +25,7 @@ const AddSubCategory = () => {
         loading,
         error,
         createdSubCategory,
-        redirectToProfile,
+        // redirectToProfile,
         formData} = values
 
         //load categories and set form data
@@ -100,13 +100,13 @@ const AddSubCategory = () => {
                 {error}
             </div>
         );
-    
+
         const showSuccess = () => (
             <div className="alert alert-info" style={{ display: createdSubCategory ? '' : 'none' }}>
                 <h2>{` Subcategoria ${createdSubCategory} a fost creata`} </h2>
             </div>
         );
-    
+
         const showLoading = () =>
             loading && (
                 <div className="alert alert-success">

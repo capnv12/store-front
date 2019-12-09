@@ -8,10 +8,10 @@ const BigCard = ({product}) => {
     const isReduced = () => {
         if(product.pretRedus){
             return(
-                <P>{product.pretRedus} de la <span style={{textDecoration: 'line-through'}}>{product.pret}</span></P>
+                <P>{product.pretRedus} lei cu TVA <br/><span style={{textDecoration: 'line-through'}}>{product.pret} lei</span></P>
             )
         }else {
-            return <P>{product.pret}</P>
+            return <P>{product.pret} lei cu TVA</P>
         }
     }
 
@@ -46,7 +46,7 @@ transition: all .3s ease;
 &:hover{
     box-shadow: 0 15px 15px -10px rgba(0,0,0,.15);
     transition: all .3s ease;
-    color: #333 !important; 
+    color: #333 !important;
         text-decoration: none !important;
 }
 `
@@ -81,7 +81,6 @@ text-align: center;
 const Desc = styled.div`
 
 `
-
 const P = styled.p`
     margin: 20px;
     color: #207abd;

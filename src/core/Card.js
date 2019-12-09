@@ -8,10 +8,10 @@ const Card = ({product}) => {
     const isRedused = () => {
         if(product.pretRedus){
             return(
-                <P>{product.pretRedus} de la <span style={{textDecoration: 'line-through'}}>{product.pret}</span></P>
+                <P>{product.pretRedus} lei cu TVA <br/><span style={{textDecoration: 'line-through'}}>{product.pret} lei</span></P>
             )
         }else {
-            return <P>{product.pret}</P>
+            return <P>{product.pret} lei cu TVA</P>
         }
     }
 
@@ -19,11 +19,10 @@ const Card = ({product}) => {
         <Wrapper className="col-md-6 col-lg-3">
             <ListItem>
                 <StyledNavLink to="/">
-                    <ShowImage item={product} url="produse"/>
+                    <ShowImage item={product} url="produs"/>
                     <H4>{product.nume}</H4>
                     {isRedused()}
                 </StyledNavLink>
-
             </ListItem>
         </Wrapper>
     )
@@ -70,6 +69,6 @@ text-align: center;
 const P = styled.p`
     margin: 0;
     color: #207abd;
-    font-size: .875em;
+    font-size: 16px;
     text-align: center;
 `

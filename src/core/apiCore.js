@@ -17,12 +17,12 @@ export const getProduct = (productId) => {
     })
     .then(response => {
         return response.json()
-       
+
     })
     .catch(error =>{
         return console.log(error)
     })
-    
+
 }
 
 // export const getSingleProduct = (productId) => {

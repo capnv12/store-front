@@ -43,6 +43,7 @@ const CollapseMenu = (props) => {
     top: 4.5rem;
     left: 0;
     right: 0;
+    z-index:999
   `;
 
   const NavLinks = styled.ul`
