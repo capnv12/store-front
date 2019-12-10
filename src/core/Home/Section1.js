@@ -56,11 +56,11 @@ const Section1 = () => {
 
     return(
             <Wrapper className="container text-center">
-            <div className="row justify-content-center">
-                <BigCard product={singleProduct1}/>
-                <BigCard product={singleProduct2}/>
-                <BigCard product={singleProduct3}/>
-            </div>
+                <div className="row justify-content-center">
+                    <BigCard product={singleProduct1}/>
+                    <BigCard product={singleProduct2}/>
+                    <BigCard product={singleProduct3}/>
+                </div>
             </Wrapper >
     )
 }

@@ -59,7 +59,7 @@ const AddSubCategory = () => {
                         setValues({...values, error:data.error})
                     }else{
                         setValues({...values, nume:'',
-                        categorie:'',
+                        categorii:'',
                         loading:false,
                         createdSubCategory:data.nume })
                     }

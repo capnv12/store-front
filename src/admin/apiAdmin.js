@@ -71,3 +71,26 @@ export const getSubCategories = () => {
         return console.log(err)
     })
 }
+export const getBrand = () => {
+    return fetch (`${API}/brand/`,{
+        method:"GET"
+    })
+    .then(response => {
+        return response.json()
+    })
+    .catch(err =>{
+        return console.log(err)
+    })
+}
+export const getTipProdus = () => {
+    return fetch (`${API}/tipuri-produs/`,{
+        method:"GET"
+    })
+    .then(response => {
+        return response.json()
+    })
+    .catch(err =>{
+        return console.log(err)
+    })
+}
+

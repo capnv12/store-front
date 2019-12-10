@@ -16,7 +16,7 @@ const Card = ({product}) => {
     }
 
     return(
-        <Wrapper className="col-md-6 col-lg-3">
+        <Wrapper className="col-md-6">
             <ListItem>
                 <StyledNavLink to="/">
                     <ShowImage item={product} url="produs"/>

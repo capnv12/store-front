@@ -24,7 +24,41 @@ export const getProduct = (productId) => {
     })
 
 }
+export const getSubCategories = () => {
+    return fetch (`${API}/sub-categorii/` && fetch (`${API}/brand/`,{
+        method:"GET"
+    }))
+    .then(response => {
+        return response.json()
+    })
+    .catch(err =>{
+        return console.log(err)
+    })
+}
+export const listProducts = () => {
+    return fetch (`${API}/produse/`,{
+        method:"GET"
+    })
+    .then(response => {
+        return response.json()
 
+    })
+    .catch(error =>{
+        return console.log(error)
+    })
+
+}
+export const getBrand = () => {
+    return fetch (`${API}/brand/`,{
+        method:"GET"
+    })
+    .then(response => {
+        return response.json()
+    })
+    .catch(err =>{
+        return console.log(err)
+    })
+}
 // export const getSingleProduct = (productId) => {
 //     return fetch(`${API}/produs/${productId}/`, {
 //         method:"GET"
@@ -36,3 +70,24 @@ export const getProduct = (productId) => {
 //         return console.log(err)
 //     })
 // }
+
+export const getFilteredProducts = (skip, limit, filters = {}) => {
+    const data = {
+        limit, skip, filters
+    }
+
+    return fetch(`${API}/produse/by/search/`,{
+        method: "POST",
+        headers: {
+            Accept: 'application/json',
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data)
+    })
+    .then(response => {
+        return response.json()
+    })
+    .catch(err => {
+        console.log(err)
+    })
+}

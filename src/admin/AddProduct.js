@@ -4,7 +4,7 @@ import Layout from '../core/Layout'
 import BasicLayout from '../core/BasicLayout'
 import {NavLink} from 'react-router-dom'
 import {isAuthenticated} from '../auth/index'
-import {createProduct,getSubCategories} from './apiAdmin'
+import {createProduct,getSubCategories, getBrand} from './apiAdmin'
 
 // import TinyMCE from 'react-tinymce';
 // import { Editor } from '@tinymce/tinymce-react';
@@ -17,7 +17,7 @@ const AddProduct = () => {
         subtitlu:'',
         descriere:'',
         descriereScurta:'',
-        brand:'',
+        brands:[],
         categorii:[],
         pret:'',
         pretRedus:'',
@@ -41,7 +41,7 @@ const AddProduct = () => {
     subtitlu,
     descriere,
     descriereScurta,
-    brand,
+    brands,
     categorii,
     pret,
     pretRedus,
@@ -59,19 +59,30 @@ const AddProduct = () => {
     // redirectToProfile,
     formData} = values
 
-    const init = () => {
-        getSubCategories().then(data=> {
+    const initbrands = () => {
+        getBrand().then(data=> {
             if(data.error) {
                 setValues({...values, error:data.error})
             }else{
-                setValues({...values, categorii:data, formData:new FormData()})
+                setValues({...values, brands:data})
+            }
+        })
+    }
+
+    const initcategories = () => {
+        getSubCategories().then(data1=> {
+            if(data1.error) {
+                setValues({...values, error:data1.error})
+            }else{
+                setValues({...values, categorii:data1, formData:new FormData()})
             }
         })
     }
 
     useEffect(() => {
-        init()
-    },[])
+        initbrands()
+        initcategories()
+    },[]);
 
     const handleChange = nume => event => {
         const value = nume === 'photo' ? event.target.files[0] : event.target.value;
@@ -92,8 +103,8 @@ const AddProduct = () => {
                     subtitlu:'',
                     descriere:'',
                     descriereScurta:'',
-                    brand:'',
-                    categorii:'',
+                    brands:[],
+                    categorii:[],
                     pret:'',
                     pretRedus:'',
                     SKU:'',
@@ -141,7 +152,14 @@ const AddProduct = () => {
                 </div>
                 <div className="form-group">
                     <label className="text-muted">Brand</label>
-                    <input onChange={handleChange('brand')} type="text" className="form-control" value={brand}/>
+                    <select onChange={handleChange('brand')} className="form-control">
+                        <option>Alege categorie</option>
+                        {brands && brands.map((b,i) => {
+                            return(
+                                <option key={i} value={b._id}>{b.nume}</option>
+                            )
+                        })}
+                    </select>
                 </div>
                 <div className="form-group">
                     <label className="text-muted">Categorie</label>
