@@ -13,6 +13,9 @@ import AddProduct from './admin/AddProduct'
 import AddSubCategory from './admin/AddSubCategory'
 import Shop from './core/Shop'
 
+//pages
+import SeriaMavic from './core/Pages/SeriaMavic'
+
 const Routes = () => {
     return (
         <BrowserRouter>
@@ -26,6 +29,10 @@ const Routes = () => {
                 <AdminRoute path="/categorie/creare/" exact component={AddCategory}/>
                 <AdminRoute path="/produs/creare/" exact component={AddProduct}/>
                 <AdminRoute path="/sub-categorie/creare/" exact component={AddSubCategory}/>
+
+                {/* pages */}
+
+                <Route path="/seria-mavic" exact component={SeriaMavic}/>
             </Switch>
             <GlobalStyles/>
         </BrowserRouter>

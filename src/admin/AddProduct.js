@@ -4,7 +4,7 @@ import Layout from '../core/Layout'
 import BasicLayout from '../core/BasicLayout'
 import {NavLink} from 'react-router-dom'
 import {isAuthenticated} from '../auth/index'
-import {createProduct,getSubCategories, getBrand} from './apiAdmin'
+import {createProduct,getSubCategories, getBrand, getTipProdus} from './apiAdmin'
 
 // import TinyMCE from 'react-tinymce';
 // import { Editor } from '@tinymce/tinymce-react';
@@ -24,7 +24,7 @@ const AddProduct = () => {
         SKU:'',
         inStoc:[],
         cantitate:'',
-        tipProdus:'',
+        tipProduse:[],
         specificatii:'',
         inTheBox:'',
         photo:'',
@@ -48,7 +48,7 @@ const AddProduct = () => {
     SKU,
     // inStoc,
     cantitate,
-    tipProdus,
+    tipProduse,
     specificatii,
     inTheBox,
     inregistrare,
@@ -59,29 +59,38 @@ const AddProduct = () => {
     // redirectToProfile,
     formData} = values
 
-    const initbrands = () => {
-        getBrand().then(data=> {
-            if(data.error) {
-                setValues({...values, error:data.error})
-            }else{
-                setValues({...values, brands:data})
-            }
-        })
-    }
+    const init = () => {
+        let brands
+        let categorii
+        let tipProduse
+        getBrand().then(data => {
+            if (data.error){
+                setValues({...values, error: data.error})
+            }else {
+                brands = data
+                getSubCategories().then(categoriesData => {
+                    if (categoriesData.error){
+                        setValues({...values, error: categoriesData.error})
+                    }else{
+                        categorii = categoriesData
+                        getTipProdus().then(tipProdusData => {
+                            if (tipProdusData.error){
+                                setValues({...values, error: tipProdusData.error})
+                            }else{
+                                tipProduse=tipProdusData
+                                setValues({...values, brands: brands, categorii: categorii,tipProduse:tipProduse, formData: new FormData()})
 
-    const initcategories = () => {
-        getSubCategories().then(data1=> {
-            if(data1.error) {
-                setValues({...values, error:data1.error})
-            }else{
-                setValues({...values, categorii:data1, formData:new FormData()})
+                            }
+                        })
+
+                    }
+                })
             }
         })
     }
 
     useEffect(() => {
-        initbrands()
-        initcategories()
+        init()
     },[]);
 
     const handleChange = nume => event => {
@@ -103,14 +112,14 @@ const AddProduct = () => {
                     subtitlu:'',
                     descriere:'',
                     descriereScurta:'',
-                    brands:[],
-                    categorii:[],
+                    brands:'',
+                    categorii:'',
                     pret:'',
                     pretRedus:'',
                     SKU:'',
-                    inStoc:[],
+                    inStoc:'',
                     cantitate:'',
-                    tipProdus:'',
+                    tipProduse:'',
                     specificatii:'',
                     inTheBox:'',
                     inregistrare:'',
@@ -153,7 +162,7 @@ const AddProduct = () => {
                 <div className="form-group">
                     <label className="text-muted">Brand</label>
                     <select onChange={handleChange('brand')} className="form-control">
-                        <option>Alege categorie</option>
+                        <option>Alege Brand</option>
                         {brands && brands.map((b,i) => {
                             return(
                                 <option key={i} value={b._id}>{b.nume}</option>
@@ -206,7 +215,14 @@ const AddProduct = () => {
                 </div>
                 <div className="form-group">
                     <label className="text-muted">Tip Produs</label>
-                    <input onChange={handleChange('tipProdus')} type="text" className="form-control" value={tipProdus}/>
+                    <select onChange={handleChange('tipProdus')} className="form-control">
+                        <option>Alege categorie</option>
+                        {tipProduse && tipProduse.map((b,i) => {
+                            return(
+                                <option key={i} value={b._id}>{b.nume}</option>
+                            )
+                        })}
+                    </select>
                 </div>
                 <div className="form-group">
                     <label className="text-muted">Specificatii</label>

@@ -59,6 +59,18 @@ export const getBrand = () => {
         return console.log(err)
     })
 }
+
+export const getTipProdus = () => {
+    return fetch (`${API}/tipuri-produs/`,{
+        method:"GET"
+    })
+    .then(response => {
+        return response.json()
+    })
+    .catch(err =>{
+        return console.log(err)
+    })
+}
 // export const getSingleProduct = (productId) => {
 //     return fetch(`${API}/produs/${productId}/`, {
 //         method:"GET"

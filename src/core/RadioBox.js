@@ -1,4 +1,5 @@
-import React, {useState, useEffect, Fragment} from 'react'
+import React, {useState, useEffect} from 'react'
+import styled from 'styled-components'
 
 const RadioBox = ({prices, handleFilters}) => {
     const [value, setValue] = useState(0)
@@ -9,11 +10,18 @@ const RadioBox = ({prices, handleFilters}) => {
     }
 
     return prices.map((p, i) => (
-        <div key={i} className="">
-            <input onChange={handleChange} value={p._id} name={p} type="radio" className="mr-5 ml-4"/>
-            <label className="form-check-label">{p.nume}</label>
-        </div>
+        <Li key={i} className="list-unstyled custom-control custom-radio">
+            <input onChange={handleChange} value={p._id} name={p} type="radio" className="custom-control-input" id={p._id}/>
+            <label class="custom-control-label" htmlFor={p._id}>{p.nume}</label>
+        </Li>
     ))
 }
 
 export default RadioBox
+
+const Li = styled.li`
+margin-top: 8px;
+margin-bottom: 16px;
+font-size: 16px;
+padding:10px 10px 0 25px;
+`

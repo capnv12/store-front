@@ -1,15 +1,15 @@
 import React, {useState, useEffect} from 'react'
 import styled from 'styled-components'
 
-const Checkbox = ({brand, handleFilters}) => {
+const CheckboxTipProdus = ({tipProdus, handleFilters}) => {
 
     const [checked, setChecked] = useState([])
 
-    const handleToogle = c => () => {
-        const currentCategoryId = checked.indexOf(c)
+    const handleToogle = h => () => {
+        const currentCategoryId = checked.indexOf(h)
         const newCheckedCategoryId = [...checked]
         if(currentCategoryId === -1){
-            newCheckedCategoryId.push(c)
+            newCheckedCategoryId.push(h)
         }else{
             newCheckedCategoryId.splice(currentCategoryId, 1)
         }
@@ -17,15 +17,15 @@ const Checkbox = ({brand, handleFilters}) => {
         handleFilters(newCheckedCategoryId)
     }
 
-    return brand.map((c, i) => (
+    return tipProdus.map((h, i) => (
             <Li key={i} className="list-unstyled custom-control custom-checkbox">
-                <input onChange={handleToogle(c._id)} value={checked.indexOf(c._id===-1)} type="checkbox" className="custom-control-input" id={c._id}/>
-                <label class="custom-control-label" htmlFor={c._id} >{c.nume}</label>
+                <input onChange={handleToogle(h._id)} value={checked.indexOf(h._id===-1)} type="checkbox" className="custom-control-input" id={h._id}/>
+                <label className="form-check-label" class="custom-control-label" htmlFor={h._id} >{h.nume}</label>
             </Li>
         ))
 }
 
-export default Checkbox
+export default CheckboxTipProdus
 
 const Li = styled.li`
 margin-top: 8px;

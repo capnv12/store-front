@@ -1,8 +1,9 @@
 import React, {useState, useEffect} from 'react'
 import Layout from './Layout'
 import {getSubCategories} from './apiCore'
-import {listProducts, getBrand, getFilteredProducts} from './apiCore'
+import {listProducts, getBrand, getFilteredProducts, getTipProdus} from './apiCore'
 import Checkbox from './Checkbox'
+import CheckboxTipProdus from './CheckBoxTipProdus'
 import RadioBox from './RadioBox'
 import {prices} from './fixedPrices'
 import Card from './Card'
@@ -12,6 +13,7 @@ import styled from 'styled-components'
 const Shop = () => {
     const [categories, setCategories] = useState([])
     const [brand, setBrands] = useState([])
+    const [tipProdus, setTipProdus] = useState([])
     const [products, setProducts] = useState([])
     const [error, setError] = useState(false)
     const [limit, setLimit] = useState(6)
@@ -19,10 +21,10 @@ const Shop = () => {
     const [filteredResults, setFilteredResults] = useState([])
 
     const [myFilters, setMyFilters] = useState({
-        filters:{brand: [], pret: []}
+        filters:{brand: [], pret: [], tipProdus:[]}
     })
 
-    const init = () => {
+    const initBrand = () => {
         // getSubCategories().then(data=> {
         //     if(data.error) {
         //         setError(data.error)
@@ -46,6 +48,15 @@ const Shop = () => {
             }
         })
     }
+    const initTipProdus = () => {
+        getTipProdus().then(data=> {
+            if(data.error) {
+                setError(data.error)
+            }else{
+                setTipProdus(data)
+            }
+        })
+    }
 
 
     const loadFilteredResults = newFilters => {
@@ -60,7 +71,8 @@ const Shop = () => {
     };
 
     useEffect(() => {
-        init()
+        initBrand()
+        initTipProdus()
         loadFilteredResults(skip, limit, myFilters.filters)
     },[])
 
@@ -92,17 +104,28 @@ console.log(filteredResults.data)
         <Layout>
             <Wrapper className="container ">
                 <div className="row justify-content-center">
-                    <div className="col-md-4">
-                    <ul className="">
-                                    <Checkbox brand={brand} handleFilters={ filters => handleFilters(filters, "brand")}/>
-                                </ul>
-
-                                <div className="">
-                                    <RadioBox prices={prices} handleFilters={ filters => handleFilters(filters, "pret")}/>
-                            </div>
-                    </div>
+                    <Left className="col-md-4">
+                        <Title>
+                            <H5>Brand</H5>
+                        </Title>
+                        <Ul className="">
+                            <Checkbox brand={brand} handleFilters={ filters => handleFilters(filters, "brand")}/>
+                        </Ul>
+                        <Title>
+                            <H5>Tip Produs</H5>
+                        </Title>
+                    <Ul className="">
+                        <CheckboxTipProdus tipProdus={tipProdus} handleFilters={ filters => handleFilters(filters, "tipProdus")}/>
+                    </Ul>
+                        <Title>
+                            <H5>Categorie Pret</H5>
+                        </Title>
+                    <Ul className="">
+                        <RadioBox prices={prices} handleFilters={ filters => handleFilters(filters, "pret")}/>
+                    </Ul>
+                    </Left>
                     <div className="col-md-8">
-                    <div className="row">
+                        <div className="row">
                                 {filteredResults.map((product, i) => (
                                                     <Card product={product} />
                                             ))}
@@ -123,4 +146,25 @@ padding-right: 0;
 `
 const Wrapper = styled.div`
     margin-bottom: 40px;
+`
+const Left = styled.div`
+background: #fff;
+position: sticky;
+max-width: 288px;
+    margin-right: 16px;
+`
+const Title = styled.div`
+justify-content: space-between;
+    border-top: 1px solid #f0f1f2;
+    border-bottom: 1px solid #f0f1f2;
+    padding: 16px 24px;
+`
+const H5 = styled.h5`
+color: #3b3e40;
+`
+const Ul = styled.ul`
+padding-top: .25rem;
+
+margin-bottom: 16px;
+    font-size: 14px;
 `

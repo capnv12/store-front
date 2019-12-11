@@ -3,8 +3,7 @@ import {Link} from 'react-router-dom'
 import styled from 'styled-components'
 import ShowImage from './ShowImage'
 
-const BigCard = ({product, url="/"}) => {
-
+const PageCard = ({product, url="/"}) => {
     const isReduced = () => {
         if(product.pretRedus){
             return(
@@ -16,26 +15,29 @@ const BigCard = ({product, url="/"}) => {
     }
 
     return(
-        <Wrapper className="col-md-6 col-lg-4">
-            <ListItem>
-                <StyledLink to={url}>
-                    <ShowImage item={product} url="produs"/>
-                    <H4>{product.nume}</H4>
-                    <Desc>{product.descriereScurta}</Desc>
-                    {isReduced()}
-                </StyledLink>
-
-            </ListItem>
+        <Wrapper className="col-md-6 col-lg-6">
+            <Link to={url}>
+                <ListItem>
+                    <div className="row align-items-center">
+                        <div className="col-sm-6 text-center">
+                            <ShowImage item={product} url="produs"/>
+                        </div>
+                        <div className="col-sm-6">
+                            <H4>{product.nume}</H4>
+                            <Desc>{product.descriereScurta}</Desc>
+                            {isReduced()}
+                        </div>
+                    </div>
+                </ListItem>
+            </Link>
         </Wrapper>
     )
 }
 
-export default BigCard
+export default PageCard
 
 const Wrapper = styled.div`
-padding-left: 5px;
-padding-right: 5px;
-padding-bottom: 10px;
+background-color: #fff;
 `
 const ListItem =styled.div`
 background-color: #fff;
@@ -49,24 +51,6 @@ transition: all .3s ease;
     color: #333 !important;
         text-decoration: none !important;
 }
-`
-const StyledLink = styled(Link)`
-color: #333;
-text-decoration:none;
-
-    &a{
-        color: #333;
-text-decoration:none;
-    }
-    &a:hover{
-        color: #333;
-text-decoration:none;
-    }
-
-    &hover{
-        color: #333;
-text-decoration:none;
-    }
 `
 const H4 = styled.h4`
 font-size: 1.125em;
