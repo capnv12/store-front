@@ -51,7 +51,7 @@ const AddProduct = () => {
     tipProduse,
     specificatii,
     inTheBox,
-    inregistrare,
+    // inregistrare,
     // photo,
     loading,
     error,

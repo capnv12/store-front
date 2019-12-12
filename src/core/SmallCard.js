@@ -3,7 +3,7 @@ import {NavLink} from 'react-router-dom'
 import ShowImage from './ShowImage'
 import styled from 'styled-components'
 
-const Card = ({product,url='/'}) => {
+const SmallCard = ({product, url='/', children}) => {
 
     const isRedused = () => {
         if(product.pretRedus){
@@ -16,9 +16,10 @@ const Card = ({product,url='/'}) => {
     }
 
     return(
-        <Wrapper className="col-md-6">
+        <Wrapper className="col-sm-6 col-md-6 col-lg-3">
             <ListItem>
                 <StyledNavLink to={url}>
+                    {children}
                     <ShowImage item={product} url="produs"/>
                     <H4>{product.nume}</H4>
                     {isRedused()}
@@ -28,7 +29,7 @@ const Card = ({product,url='/'}) => {
     )
 }
 
-export default Card
+export default SmallCard
 
 const Wrapper = styled.div`
 padding-left: 5px;

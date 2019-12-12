@@ -1,7 +1,6 @@
 import React, {useState, useEffect} from 'react'
 import Layout from './Layout'
-import {getSubCategories} from './apiCore'
-import {listProducts, getBrand, getFilteredProducts, getTipProdus} from './apiCore'
+import {getBrand, getFilteredProducts, getTipProdus} from './apiCore'
 import Checkbox from './Checkbox'
 import CheckboxTipProdus from './CheckBoxTipProdus'
 import RadioBox from './RadioBox'
@@ -11,10 +10,10 @@ import styled from 'styled-components'
 
 
 const Shop = () => {
-    const [categories, setCategories] = useState([])
+    // const [categories, setCategories] = useState([])
     const [brand, setBrands] = useState([])
     const [tipProdus, setTipProdus] = useState([])
-    const [products, setProducts] = useState([])
+    // const [products, setProducts] = useState([])
     const [error, setError] = useState(false)
     const [limit, setLimit] = useState(6)
     const [skip, setSkip] = useState(0)

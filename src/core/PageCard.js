@@ -15,10 +15,10 @@ const PageCard = ({product, url="/"}) => {
     }
 
     return(
-        <Wrapper className="col-md-6 col-lg-6">
-            <Link to={url}>
-                <ListItem>
-                    <div className="row align-items-center">
+        <Wrapper className="col-md-9 col-lg-6 ">
+            <Link to={url} >
+                <ListItem className="row align-items-center ">
+                    <div className="row align-items-center align-middle">
                         <div className="col-sm-6 text-center">
                             <ShowImage item={product} url="produs"/>
                         </div>
@@ -37,13 +37,9 @@ const PageCard = ({product, url="/"}) => {
 export default PageCard
 
 const Wrapper = styled.div`
-background-color: #fff;
-`
-const ListItem =styled.div`
-background-color: #fff;
-height: 100%;
+margin:0 0px 20px 0;
 overflow: hidden;
-padding: 0 20px 20px;
+padding: 0 20px 0 20px;
 transition: all .3s ease;
 &:hover{
     box-shadow: 0 15px 15px -10px rgba(0,0,0,.15);
@@ -51,6 +47,12 @@ transition: all .3s ease;
     color: #333 !important;
         text-decoration: none !important;
 }
+`
+const ListItem =styled.div`
+background-color: #fff;
+height: 100%;
+overflow: hidden;
+padding: 0 20px 20px;
 `
 const H4 = styled.h4`
 font-size: 1.125em;
@@ -63,7 +65,7 @@ overflow: hidden;
 text-align: center;
 `
 const Desc = styled.div`
-
+text-align: center;
 `
 const P = styled.p`
     margin: 20px;
