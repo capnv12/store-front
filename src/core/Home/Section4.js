@@ -56,13 +56,11 @@ const Section2 = () => {
         // loadProduct3()
     },[])
 
-    console.log(errorFound)
-
 
     return(
         <div>
         <Wrapper className="section-2">
-        <FullCardTitle title="DJI Mavic 2" url='/dji-mavic2' />
+        <FullCardTitle title="DJI Mavic 2" url='/seria-mavic' />
             <FullCard product={singleProduct1} bg={mavic2HomeBg}/>
         </Wrapper>
         <Container className="container">

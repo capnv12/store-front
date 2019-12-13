@@ -29,12 +29,12 @@ const Slider = () => {
             }}
         >
             {images.map((image, i)=> (
-                <Wrapper>
-                    <GalleryImage objectFit="cover" key={i} src={image}/>
+                <Wrapper key={i}>
+                    <GalleryImage objectFit="cover"  src={image}/>
                 </Wrapper>
 
             ))}
-                                
+
         </Gallery>
     )
 }

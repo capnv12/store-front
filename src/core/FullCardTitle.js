@@ -1,5 +1,5 @@
 import React from 'react'
-import {Link} from 'react-router-dom'
+import {NavLink} from 'react-router-dom'
 import styled from 'styled-components'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faChevronRight} from '@fortawesome/free-solid-svg-icons'
@@ -23,7 +23,7 @@ const StyledFontAwesomeIcon = styled(FontAwesomeIcon)`
 const MainTitle = styled.div`
 position: relative;
 `
-const StyledLink= styled(Link)`
+const StyledLink= styled(NavLink)`
 position: absolute;
 right: 0;
 top: 0;

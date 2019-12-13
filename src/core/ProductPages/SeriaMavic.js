@@ -139,7 +139,7 @@ const SeriaMavic = () => {
 
 
     const [resource, setRescoure] = useState()
-    
+
     return(
         <PageLayout banner={mavic2Page} name={"Seria Mavic"}>
             <Container className="container">
@@ -154,11 +154,11 @@ const SeriaMavic = () => {
                 </Row>
                 <H2>Accesorii</H2>
                 <StyledListGroup>
-                <ListGroup horizontal defaultActiveKey="#accesorii-mavic-mini">
-                    <StyledListItem action href="#accesorii-mavic-mini" onClick={() => setRescoure(AccesoriiMavicMini())}>Mavic Mini</StyledListItem>
-                    <StyledListItem action href="#accesorii-mavic-2" onClick={() => setRescoure(AccesoriiMavic2())}>Mavic 2</StyledListItem>
-                    <StyledListItem action href="#accesorii-mavic-air" onClick={() => setRescoure(AccesoriiMavicAir())}>Mavic Air</StyledListItem>
-                    <StyledListItem action href="#accesorii-mavic-pro "onClick={() => setRescoure(AccesoriiMavicPro())}>Mavic Pro</StyledListItem>
+                <ListGroup className="row mb-3" horizontal defaultActiveKey="#accesorii-mavic-mini">
+                    <StyledListItem className="col-md-2" action href="#accesorii-mavic-mini" onClick={() => setRescoure(AccesoriiMavicMini())}>Mavic Mini</StyledListItem>
+                    <StyledListItem className="col-md-2" action href="#accesorii-mavic-2" onClick={() => setRescoure(AccesoriiMavic2())}>Mavic 2</StyledListItem>
+                    <StyledListItem className="col-md-2" action href="#accesorii-mavic-air" onClick={() => setRescoure(AccesoriiMavicAir())}>Mavic Air</StyledListItem>
+                    <StyledListItem className="col-md-2" action href="#accesorii-mavic-pro "onClick={() => setRescoure(AccesoriiMavicPro())}>Mavic Pro</StyledListItem>
                 </ListGroup>
                 </StyledListGroup>
 
@@ -212,8 +212,9 @@ const StyledListGroup = styled.div`
 
 const StyledListItem = styled(ListGroup.Item)`
     border:0px;
-    margin-right:5em;
+    margin:0 5px 5px 5px;
     border-radius:5px;
+
 `
 const Wrapper = styled.div`
 padding-left: 5px;

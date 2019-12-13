@@ -52,8 +52,6 @@ const Section1 = () => {
         loadProduct3()
     },[])
 
-    console.log(errorFound)
-
     return(
             <Wrapper className="container text-center">
                 <div className="row justify-content-center">

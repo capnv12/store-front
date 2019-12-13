@@ -56,8 +56,6 @@ const Section2 = () => {
         // loadProduct3()
     },[])
 
-    console.log(errorFound)
-
     return(
         <div>
         <Wrapper className="section-2">

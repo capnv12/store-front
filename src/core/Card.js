@@ -19,7 +19,7 @@ const Card = ({product,url='/'}) => {
         <Wrapper className="col-md-6">
             <ListItem>
                 <StyledNavLink to={url}>
-                    <ShowImage item={product} url="produs"/>
+                    <ShowImage url="produs" item={product}/>
                     <H4>{product.nume}</H4>
                     {isRedused()}
                 </StyledNavLink>
