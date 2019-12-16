@@ -10,6 +10,7 @@ const AddSubCategory = () => {
 
     const [values, setValues] = useState({
         nume:'',
+        slug:'',
         categorii:[],
         loading:false,
         error:'',
@@ -21,6 +22,7 @@ const AddSubCategory = () => {
     const {user, token} =isAuthenticated()
     const {
         nume,
+        slug,
         categorii,
         loading,
         error,
@@ -58,7 +60,7 @@ const AddSubCategory = () => {
                     if(data.error){
                         setValues({...values, error:data.error})
                     }else{
-                        setValues({...values, nume:'',
+                        setValues({...values, nume:'', slug:'',
                         categorii:'',
                         loading:false,
                         createdSubCategory:data.nume })
@@ -72,6 +74,10 @@ const AddSubCategory = () => {
                     <div className="form-group">
                         <label className="text-muted">Nume</label>
                         <input onChange={handleChange('nume')} type="text" className="form-control" value={nume}/>
+                    </div>
+                    <div className="form-group">
+                        <label className="text-muted">Slug(numele categoriei, in loc de spatiu folositi "-")</label>
+                        <input onChange={handleChange('slug')} type="text" className="form-control" value={slug}/>
                     </div>
                     <div className="form-group">
                         <label className="text-muted">Categorie</label>

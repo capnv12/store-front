@@ -25,6 +25,7 @@ import SeriaInspire from './core/ProductPages/SeriaInspire.js'
 import SeriaRonin from './core/ProductPages/SeriaRonin'
 import SeriaEnterprise from './core/ProductPages/SeriaEnterprise.js'
 import SeriaPowerVison from './core/ProductPages/SeriaPowerVison.js'
+import Category from './core/CategoryPages/Category'
 
 
 const Routes = () => {
@@ -54,6 +55,10 @@ const Routes = () => {
                 <Route path="/seria-ronin" exact component={SeriaRonin}/>
                 <Route path="/seria-enterprise" exact component={SeriaEnterprise}/>
                 <Route path="/seria-powervison" exact component={SeriaPowerVison}/>
+
+                {/* Category */}
+
+                <Route path="/categorie/:slug" exact component={Category}/>
             </Switch>
             <GlobalStyles/>
         </BrowserRouter>

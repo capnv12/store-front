@@ -2,6 +2,7 @@ import React, {useState, useEffect}from 'react'
 import {getProduct} from '../apiCore'
 import BigCard from '../BigCard'
 import styled from 'styled-components'
+import Search from '../Search'
 
 const Section1 = () => {
 
@@ -54,6 +55,7 @@ const Section1 = () => {
 
     return(
             <Wrapper className="container text-center">
+                                    <Search/>
                 <div className="row justify-content-center">
                     <BigCard product={singleProduct1}/>
                     <BigCard product={singleProduct2}/>
