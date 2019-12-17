@@ -2,7 +2,6 @@ import React, {useState, useEffect}from 'react'
 import {getProduct} from '../apiCore'
 import BigCard from '../BigCard'
 import styled from 'styled-components'
-import Search from '../Search'
 
 const Section1 = () => {
 
@@ -12,7 +11,7 @@ const Section1 = () => {
     const [error, setError] =useState(false)
 
     const loadProduct1 = () =>{
-        getProduct('5dedf75ecb14b5280850c248').then(data => {
+        getProduct('5dec24bde89df82f67f82ff5').then(data => {
             if(data.error) {
                 setError(data.error)
             }
@@ -55,7 +54,6 @@ const Section1 = () => {
 
     return(
             <Wrapper className="container text-center">
-                                    <Search/>
                 <div className="row justify-content-center">
                     <BigCard product={singleProduct1}/>
                     <BigCard product={singleProduct2}/>

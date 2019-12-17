@@ -17,6 +17,7 @@ const AddProduct = () => {
         subtitlu:'',
         descriere:'',
         descriereScurta:'',
+        slug:'',
         brands:[],
         categorii:[],
         pret:'',
@@ -41,6 +42,7 @@ const AddProduct = () => {
     subtitlu,
     descriere,
     descriereScurta,
+    slug,
     brands,
     categorii,
     pret,
@@ -112,6 +114,7 @@ const AddProduct = () => {
                     subtitlu:'',
                     descriere:'',
                     descriereScurta:'',
+                    slug:'',
                     brands:'',
                     categorii:'',
                     pret:'',
@@ -144,6 +147,10 @@ const AddProduct = () => {
                 <div className="form-group">
                     <label className="text-muted">Nume</label>
                     <input onChange={handleChange('nume')} type="text" className="form-control" value={nume}/>
+                </div>
+                <div className="form-group">
+                    <label className="text-muted">Slug</label>
+                    <input onChange={handleChange('slug')} type="text" className="form-control" value={slug}/>
                 </div>
                 <div className="form-group">
                     <label className="text-muted">Subtitlu</label>

@@ -22,7 +22,7 @@ const AdminDashboard = () => {
 
                     <LiTitle>Adugare/Actualizare</LiTitle>
 
-                    <NavLink to="/produs/creare/" className="nav-link"><Li>Creare Produs</Li></NavLink>
+                    <NavLink to="/produse/creare/" className="nav-link"><Li>Creare Produs</Li></NavLink>
                     <NavLink to="/sub-categorie/creare/" className="nav-link"><Li>Creare Subcategorie</Li></NavLink>
                     <NavLink to="/categorie/creare/" className="nav-link"><Li>Creare Categorie</Li></NavLink>
                     <NavLink to="/produs/actualizare" className="nav-link"><Li>Actualizare Produs</Li></NavLink>

@@ -18,7 +18,7 @@ const SmallCard = ({product, url='/', children}) => {
     return(
         <Wrapper className="col-sm-6 col-md-6 col-lg-3">
             <ListItem>
-                <StyledNavLink to={url}>
+                <StyledNavLink to={`/produsul/${product.slug}`}>
                     {children}
                     <ShowImage item={product} url="produs"/>
                     <H4>{product.nume}</H4>

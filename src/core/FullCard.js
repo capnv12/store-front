@@ -24,7 +24,7 @@ const FullCard = ({product, bg}) => {
                 <Container className="container">
                     <div className="row">
                         <div className="col-md-9 col-lg-6">
-                        <StyledLink to="/">
+                        <StyledLink to={`/produs/${product._id}`}>
                             <Box className="align-middle">
                                 <div className="row align-items-center">
                                     <div className="col-sm-6 text-center">

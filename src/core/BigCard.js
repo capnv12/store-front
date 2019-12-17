@@ -18,7 +18,7 @@ const BigCard = ({product, url="/"}) => {
     return(
         <Wrapper className="col-md-6 col-lg-4">
             <ListItem>
-                <StyledLink to={url}>
+                <StyledLink to={`/produsul/${product.slug}`}>
                     <ShowImage item={product} url="produs"/>
                     <H4>{product.nume}</H4>
                     <Desc>{product.descriereScurta}</Desc>

@@ -5,66 +5,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faSearch} from '@fortawesome/free-solid-svg-icons'
 import styled from 'styled-components'
 
-const Search = ({handleSeac}) => {
+const SearchBar = ({searchSubmit, handleChange}) => {
 
-    const [data, setData] = useState({
-        categorii:[],
-        categorie:'',
-        search:'',
-        result:[],
-        searched:false
-    })
-
-    const {categorii, categorie, search, result, searched} = data
-
-    const loadCategories = () => {
-        getSubCategories().then(data => {
-            if(data.error) {
-                console.log(data.error)
-            }else{
-                setData({...data, categorii:data})
-            }
-        })
-    }
-
-    useEffect(() => {
-        loadCategories()
-    },[])
-
-    const searchData = () => {
-        // console.log(search,categorie)
-        if(search){
-            list({search: search || undefined, categorie:categorie})
-            .then(response => {
-                if(response.error) {
-                    console.log(response.error)
-                }else{
-                    setData({...data, result:response, searched:true})
-                }
-            })
-        }
-    }
-
-
-    const searchSubmit = (e) => {
-        e.preventDefault()
-        searchData()
-    }
-    const handleChange = (nume) => (event) => {
-        setData({...data, [nume]: event.target.value, searched:false})
-    }
-
-    const searchedProducts = (result=[]) => {
-        return(
-            <div className="row">
-                {result.map((product,i) => {
-                    return(
-                        <SmallCard key={i} product={product}/>
-                    )
-                })}
-            </div>
-        )
-    }
 
     const searchForm = () => {
         return(
@@ -81,7 +23,7 @@ const Search = ({handleSeac}) => {
                                 })}
                             </select>
                         </div> */}
-                        <Input type='search' className="form-control mr-sm-2 header-search-input" onChange={handleChange('search')} placeholder="Cauta"/>
+                        <Input type='search' className="form-control mr-sm-2 header-search-input" onChange={handleChange} placeholder="Cauta"/>
                     {/* </div> */}
                     {/* <div className="btn input-group-append"> */}
                         <Button className="btn my-2 my-lg-0"><FontAwesomeIcon icon={faSearch} /></Button>
@@ -94,14 +36,11 @@ const Search = ({handleSeac}) => {
     return(
         <Wrapper>
             {searchForm()}
-            <div className="container">
-                {searchedProducts(result)}
-            </div>
         </Wrapper>
     )
 }
 
-export default Search
+export default SearchBar
 const Wrapper = styled.div`
 margin:auto 0;
 `

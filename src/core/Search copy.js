@@ -5,7 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faSearch} from '@fortawesome/free-solid-svg-icons'
 import styled from 'styled-components'
 
-const Search = ({handleSeac}) => {
+const Search = () => {
 
     const [data, setData] = useState({
         categorii:[],

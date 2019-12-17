@@ -15,7 +15,7 @@ const Section2 = () => {
     const [error, setError] =useState(false)
 
     const loadProduct1 = () =>{
-        getProduct('5dedf75ecb14b5280850c248').then(data => {
+        getProduct('5dec24bde89df82f67f82ff5').then(data => {
             if(data.error) {
                 setError(data.error)
             }

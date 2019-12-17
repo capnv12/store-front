@@ -128,4 +128,13 @@ export const list = params => {
     })
     .catch(err => console.log(err))
 }
+export const readProduct = (productId) => {
+    return fetch(`${API}/produs/${productId}`, {
+        method: "GET"
+    })
+        .then(response => {
+            return response.json();
+        })
+        .catch(err => console.log(err));
+};
 

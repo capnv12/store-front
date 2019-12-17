@@ -3,6 +3,7 @@ import {Link, withRouter} from 'react-router-dom'
 import styled from "styled-components";
 import { useSpring, animated, config } from "react-spring";
 import {signout, isAuthenticated} from '../../auth/index'
+import Search from '../Search'
 
 import Logo from "./Logo";
 import BurgerMenu from "./BurgerMenu";
@@ -51,6 +52,7 @@ const Navbar = ({ navbarState, handleNavbar, history }) => {
               </div>
                 )}
           </NavLinks>
+          <Search/>
           <BurgerWrapper>
             <BurgerMenu
               navbarState={navbarState}
