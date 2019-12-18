@@ -1,48 +1,48 @@
-import React, {useState, useEffect}from 'react'
-import {getProduct} from '../apiCore'
+import React, { useState, useEffect } from 'react'
+import { getProduct } from '../apiCore'
 import BigCard from '../BigCard'
 import styled from 'styled-components'
 
 const Section1 = () => {
 
-    const [singleProduct1, setSingleProduct1] =useState([])
-    const [singleProduct2, setSingleProduct2] =useState([])
-    const [singleProduct3, setSingleProduct3] =useState([])
-    const [error, setError] =useState(false)
+    const [singleProduct1, setSingleProduct1] = useState([])
+    const [singleProduct2, setSingleProduct2] = useState([])
+    const [singleProduct3, setSingleProduct3] = useState([])
+    const [error, setError] = useState(false)
 
-    const loadProduct1 = () =>{
+    const loadProduct1 = () => {
         getProduct('5dec24bde89df82f67f82ff5').then(data => {
-            if(data.error) {
+            if (data.error) {
                 setError(data.error)
             }
-            else{
+            else {
                 setSingleProduct1(data)
             }
         })
     }
-    const loadProduct2 = () =>{
-        getProduct('5dedf75ecb14b5280850c248').then(data => {
-            if(data.error) {
+    const loadProduct2 = () => {
+        getProduct('5df9f2ce7b343459f0d709ec').then(data => {
+            if (data.error) {
                 setError(data.error)
             }
-            else{
+            else {
                 setSingleProduct2(data)
             }
         })
     }
-    const loadProduct3 = () =>{
-        getProduct('5dedf75ecb14b5280850c248').then(data => {
-            if(data.error) {
+    const loadProduct3 = () => {
+        getProduct('5df9f5fc7b343459f0d709ed').then(data => {
+            if (data.error) {
                 setError(data.error)
             }
-            else{
+            else {
                 setSingleProduct3(data)
             }
         })
     }
 
-    const errorFound = () =>{
-        if(error){
+    const errorFound = () => {
+        if (error) {
             return <h1>a aparut o eroare</h1>
         }
     }
@@ -50,16 +50,16 @@ const Section1 = () => {
         loadProduct1()
         loadProduct2()
         loadProduct3()
-    },[])
+    }, [])
 
-    return(
-            <Wrapper className="container text-center">
-                <div className="row justify-content-center">
-                    <BigCard product={singleProduct1}/>
-                    <BigCard product={singleProduct2}/>
-                    <BigCard product={singleProduct3}/>
-                </div>
-            </Wrapper >
+    return (
+        <Wrapper className="container text-center">
+            <div className="row justify-content-center">
+                <BigCard product={singleProduct1} />
+                <BigCard product={singleProduct2} />
+                <BigCard product={singleProduct3} />
+            </div>
+        </Wrapper >
     )
 }
 export default Section1

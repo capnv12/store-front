@@ -1,10 +1,10 @@
-import React, {useState, useEffect} from 'react'
+import React, { useState, useEffect } from 'react'
 import Layout from './Layout'
-import {getBrand, getFilteredProducts, getTipProdus} from './apiCore'
+import { getBrand, getFilteredProducts, getTipProdus } from './apiCore'
 import Checkbox from './Checkbox'
 import CheckboxTipProdus from './CheckBoxTipProdus'
 import RadioBox from './RadioBox'
-import {prices} from './fixedPrices'
+import { prices } from './fixedPrices'
 import Card from './Card'
 import styled from 'styled-components'
 
@@ -20,7 +20,7 @@ const Shop = () => {
     const [filteredResults, setFilteredResults] = useState([])
 
     const [myFilters, setMyFilters] = useState({
-        filters:{brand: [], pret: [], tipProdus:[]}
+        filters: { brand: [], pret: [], tipProdus: [] }
     })
 
     const initBrand = () => {
@@ -39,19 +39,19 @@ const Shop = () => {
         //         setProducts(data)
         //     }
         // })
-        getBrand().then(data=> {
-            if(data.error) {
+        getBrand().then(data => {
+            if (data.error) {
                 setError(data.error)
-            }else{
+            } else {
                 setBrands(data)
             }
         })
     }
     const initTipProdus = () => {
-        getTipProdus().then(data=> {
-            if(data.error) {
+        getTipProdus().then(data => {
+            if (data.error) {
                 setError(data.error)
-            }else{
+            } else {
                 setTipProdus(data)
             }
         })
@@ -73,12 +73,12 @@ const Shop = () => {
         initBrand()
         initTipProdus()
         loadFilteredResults(skip, limit, myFilters.filters)
-    },[])
+    }, [])
 
     const handleFilters = (filters, filterBy) => {
-        const newFilters = {...myFilters}
+        const newFilters = { ...myFilters }
         newFilters.filters[filterBy] = filters
-        if(filterBy === "pret"){
+        if (filterBy === "pret") {
             let priceValues = handlePrice(filters)
             newFilters.filters[filterBy] = priceValues
         }
@@ -90,16 +90,16 @@ const Shop = () => {
         const data = prices
         let array = []
 
-        for(let key in data){
-            if(data[key]._id === parseInt(value)){
+        for (let key in data) {
+            if (data[key]._id === parseInt(value)) {
                 array = data[key].array
             }
         }
         return array
     }
-console.log(filteredResults.data)
+    console.log(filteredResults.data)
 
-    return(
+    return (
         <Layout>
             <Wrapper className="container ">
                 <div className="row justify-content-center">
@@ -108,27 +108,27 @@ console.log(filteredResults.data)
                             <H5>Brand</H5>
                         </Title>
                         <Ul className="">
-                            <Checkbox brand={brand} handleFilters={ filters => handleFilters(filters, "brand")}/>
+                            <Checkbox brand={brand} handleFilters={filters => handleFilters(filters, "brand")} />
                         </Ul>
                         <Title>
                             <H5>Tip Produs</H5>
                         </Title>
-                    <Ul className="">
-                        <CheckboxTipProdus tipProdus={tipProdus} handleFilters={ filters => handleFilters(filters, "tipProdus")}/>
-                    </Ul>
+                        <Ul className="">
+                            <CheckboxTipProdus tipProdus={tipProdus} handleFilters={filters => handleFilters(filters, "tipProdus")} />
+                        </Ul>
                         <Title>
                             <H5>Categorie Pret</H5>
                         </Title>
-                    <Ul className="">
-                        <RadioBox prices={prices} handleFilters={ filters => handleFilters(filters, "pret")}/>
-                    </Ul>
+                        <Ul className="">
+                            <RadioBox prices={prices} handleFilters={filters => handleFilters(filters, "pret")} />
+                        </Ul>
                     </Left>
                     <div className="col-md-8">
                         <div className="row">
-                                {filteredResults.map((product, i) => (
-                                                    <Card product={product} />
-                                            ))}
-                            </div>
+                            {filteredResults.map((product, i) => (
+                                <Card product={product} />
+                            ))}
+                        </div>
                     </div>
                 </div>
             </Wrapper>
@@ -138,11 +138,11 @@ console.log(filteredResults.data)
 
 export default Shop
 
-const Container = styled.div`
-max-width: 1200px;
-padding-left: 0;
-padding-right: 0;
-`
+// const Container = styled.div`
+// max-width: 1200px;
+// padding-left: 0;
+// padding-right: 0;
+// `
 const Wrapper = styled.div`
     margin-bottom: 40px;
 `

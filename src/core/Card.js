@@ -1,25 +1,25 @@
 import React from 'react'
-import {NavLink} from 'react-router-dom'
+import { NavLink } from 'react-router-dom'
 import ShowImage from './ShowImage'
 import styled from 'styled-components'
 
-const Card = ({product,url='/'}) => {
+const Card = ({ product, url = '/' }) => {
 
     const isRedused = () => {
-        if(product.pretRedus){
-            return(
-                <P>{product.pretRedus} lei cu TVA <br/><span style={{textDecoration: 'line-through'}}>{product.pret} lei</span></P>
+        if (product.pretRedus) {
+            return (
+                <P>{product.pretRedus} lei cu TVA <br /><span style={{ textDecoration: 'line-through' }}>{product.pret} lei</span></P>
             )
-        }else {
+        } else {
             return <P>{product.pret} lei cu TVA</P>
         }
     }
 
-    return(
+    return (
         <Wrapper className="col-md-6">
             <ListItem>
-                <StyledNavLink to={`/produsul/${product.slug}`}>
-                    <ShowImage url="produs" item={product}/>
+                <StyledNavLink to={`/produs/${product._id}`}>
+                    <ShowImage url="produs" item={product} />
                     <H4>{product.nume}</H4>
                     {isRedused()}
                 </StyledNavLink>
@@ -35,7 +35,7 @@ padding-left: 5px;
 padding-right: 5px;
 padding-bottom: 10px;
 `
-const ListItem =styled.div`
+const ListItem = styled.div`
 background-color: #fff;
 height: 100%;
 overflow: hidden;

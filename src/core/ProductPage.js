@@ -1,46 +1,58 @@
-import React, {useState, useEffect}from 'react'
-import {readProduct} from './apiCore'
+import React, { useState, useEffect } from 'react'
+import { readProduct, listRelated } from './apiCore'
 import Layout from './Layout'
 import styled from 'styled-components'
 import ShowImageProduct from './ShowImageProduct'
 import ListGroup from 'react-bootstrap/ListGroup'
+import SmallCard from './SmallCard'
 
 const Product = (props) => {
 
     const [product, setProduct] = useState({})
+    const [relatedProduct, setRelatedProduct] = useState([])
     const [error, setError] = useState(false)
     const [resource, setRescoure] = useState()
 
     const loadSingleProduct = productId => {
         readProduct(productId).then(data => {
-            if(data.error){
+            if (data.error) {
                 setError(data.error)
-            }else{
+            } else {
                 setProduct(data)
+
+                listRelated(data._id).then(data => {
+                    if (data.error) {
+                        setError(data.error)
+                    } else {
+                        setRelatedProduct(data)
+                    }
+                })
             }
         })
     }
 
-    useEffect (() => {
+
+
+    useEffect(() => {
         const productId = props.match.params.productId
         loadSingleProduct(productId)
-    },[props])
+    }, [props])
 
     const isReduced = () => {
-        if(product.pretRedus){
-            return(
-                <Price style={{color: '#de3c49'}}>{product.pretRedus}  lei cu TVA <br/><Span>{product.pret} lei</Span></Price>
+        if (product.pretRedus) {
+            return (
+                <Price style={{ color: '#de3c49' }}>{product.pretRedus}  lei cu TVA <br /><Span>{product.pret} lei</Span></Price>
             )
-        }else {
+        } else {
             return <Price>{product.pret} lei cu TVA </Price>
         }
     }
     const inStoc = () => {
-        if(product.cantitate > 0){
+        if (product.cantitate > 0) {
             return (
                 <InStoc>Produsul este in stoc</InStoc>
             )
-        }else{
+        } else {
             return (
                 <InStoc>Produsul momental nu este disponibil</InStoc>
             )
@@ -48,7 +60,7 @@ const Product = (props) => {
     }
 
     const Descriere = () => {
-        return(
+        return (
             <div className="tab-content">
                 <div className="row">
                     <div className="col-md-9">
@@ -59,7 +71,7 @@ const Product = (props) => {
         )
     }
     const Specificatii = () => {
-        return(
+        return (
             <div className="tab-content">
                 <div className="row">
                     <div className="col-md-9">
@@ -70,7 +82,7 @@ const Product = (props) => {
         )
     }
     const InTheBox = () => {
-        return(
+        return (
             <div className="tab-content">
                 <div className="row">
                     <div className="col-md-9">
@@ -81,14 +93,14 @@ const Product = (props) => {
         )
     }
 
-    return(
+    return (
         <Layout>
             <Wrapper>
                 <Container className="container">
                     <div className="row mb-5">
                         <div className="col-md-6">
                             <ProductGallery>
-                                <ShowImageProduct item={product} url="produs"/>
+                                <ShowImageProduct item={product} url="produs" />
                             </ProductGallery>
                         </div>
                         <div className="col-md-6">
@@ -104,23 +116,31 @@ const Product = (props) => {
                             <ListGroup horizontal defaultActiveKey="#descriere">
                                 <StyledListItem className="col-sm-4" action href="#descriere" onClick={() => setRescoure(Descriere())}>Descriere</StyledListItem>
                                 <StyledListItem className="col-sm-4" action href="#specificatii" onClick={() => setRescoure(Specificatii())}>Specificatii</StyledListItem>
-                                <StyledListItem className="col-sm-4" action href="#in-the-box "onClick={() => setRescoure(InTheBox())}>In the Box</StyledListItem>
+                                <StyledListItem className="col-sm-4" action href="#in-the-box " onClick={() => setRescoure(InTheBox())}>In the Box</StyledListItem>
                             </ListGroup>
                         </StyledListGroup>
                         {resource ? resource :
-                        <div className="tab-content">
-                            <div className="row">
-                                <div className="col-md-9">
-                                    {product.descriere}
+                            <div className="tab-content">
+                                <div className="row">
+                                    <div className="col-md-9">
+                                        {product.descriere}
+                                    </div>
                                 </div>
-                            </div>
-                        </div>}
+                            </div>}
+                    </div>
+                    <div className="row">
+                        <h4>Produse Legate</h4>
+                        {relatedProduct.map((product, i) => {
+                            return (
+                                <SmallCard key={i} product={product} />
+                            )
+                        })}
                     </div>
                 </Container>
             </Wrapper>
         </Layout>
     )
-} 
+}
 
 export default Product
 
@@ -192,7 +212,7 @@ const StyledListItem = styled(ListGroup.Item)`
     margin:0 5px 5px 5px;
     border-radius:5px;
 `
- const InStoc = styled.div`
+const InStoc = styled.div`
  margin: 20px 0;
  line-height: 1.5em;
  color: #707473;

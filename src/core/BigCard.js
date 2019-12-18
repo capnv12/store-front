@@ -1,25 +1,25 @@
 import React from 'react'
-import {Link} from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 import ShowImage from './ShowImage'
 
-const BigCard = ({product, url="/"}) => {
+const BigCard = ({ product, url = "/" }) => {
 
     const isReduced = () => {
-        if(product.pretRedus){
-            return(
-                <P>{product.pretRedus} lei cu TVA <br/><span style={{textDecoration: 'line-through'}}>{product.pret} lei</span></P>
+        if (product.pretRedus) {
+            return (
+                <P>{product.pretRedus} lei cu TVA <br /><span style={{ textDecoration: 'line-through' }}>{product.pret} lei</span></P>
             )
-        }else {
+        } else {
             return <P>{product.pret} lei cu TVA</P>
         }
     }
 
-    return(
+    return (
         <Wrapper className="col-md-6 col-lg-4">
             <ListItem>
-                <StyledLink to={`/produsul/${product.slug}`}>
-                    <ShowImage item={product} url="produs"/>
+                <StyledLink to={`/produs/${product._id}`}>
+                    <ShowImage item={product} url="produs" />
                     <H4>{product.nume}</H4>
                     <Desc>{product.descriereScurta}</Desc>
                     {isReduced()}
@@ -37,7 +37,7 @@ padding-left: 5px;
 padding-right: 5px;
 padding-bottom: 10px;
 `
-const ListItem =styled.div`
+const ListItem = styled.div`
 background-color: #fff;
 height: 100%;
 overflow: hidden;
