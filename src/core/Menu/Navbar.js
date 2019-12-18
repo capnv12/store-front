@@ -3,8 +3,11 @@ import {Link, withRouter} from 'react-router-dom'
 import styled from "styled-components";
 import { useSpring, animated, config } from "react-spring";
 import {signout, isAuthenticated} from '../../auth/index'
+import {itemTotal} from '../cartHelpers'
 import Search from '../Search'
 
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faShoppingCart} from '@fortawesome/free-solid-svg-icons'
 import Logo from "./Logo";
 import BurgerMenu from "./BurgerMenu";
 import CollapseMenu from "./CollapseMenu";
@@ -33,6 +36,7 @@ const Navbar = ({ navbarState, handleNavbar, history }) => {
           <NavLinks style={linkAnimation}>
             {!isAuthenticated() && (
               <div>
+                <Link to="/cart"><StyledFontAwesomeIcon icon={faShoppingCart}/>Cos<CartNum>{itemTotal()}</CartNum></Link>
                 <Link  to="/logare">Logare</Link>
                 <Link  to="/inregistrare">Inregistrare</Link>
               </div>
@@ -40,6 +44,7 @@ const Navbar = ({ navbarState, handleNavbar, history }) => {
 
             {isAuthenticated() && isAuthenticated().user.role === 1 && (
               <div>
+                <Link to="/cart">Cos<sup>{itemTotal()}</sup></Link>
                 <Link  to="/cont">Cont</Link>
                 <Span onClick={() => signout(() => {history.push("/");})}>Dezautentificare</Span>
               </div>
@@ -47,11 +52,14 @@ const Navbar = ({ navbarState, handleNavbar, history }) => {
 
             {isAuthenticated() && isAuthenticated().user.role === 0 && (
               <div>
+                <Link to="/cart">Cos<sup>{itemTotal()}</sup></Link>
                 <Link  to="/cont-admin">Cont</Link>
                 <Span onClick={() => signout(() => {history.push("/");})}>Dezautentificare</Span>
               </div>
                 )}
+                
           </NavLinks>
+          
           <Search/>
           <BurgerWrapper>
             <BurgerMenu
@@ -141,4 +149,17 @@ const BurgerWrapper = styled.div`
   @media (min-width: 769px) {
     display: none;
   }
+`
+const StyledFontAwesomeIcon = styled(FontAwesomeIcon)`
+    margin-left:5px;
+`
+const CartNum = styled.span`
+line-height: 16px;
+background-color: #207abd;
+color: #fff;
+text-align: center;
+font-size: 12px;
+border-radius: 16px;
+padding: 0 5px;
+margin-left: 5px;
 `

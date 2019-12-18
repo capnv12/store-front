@@ -14,6 +14,7 @@ import AddSubCategory from './admin/AddSubCategory'
 import Shop from './core/Shop'
 import ScrollToTop from './scrollToTop'
 import Product from './core/ProductPage'
+import Cart from './core/Cart'
 
 //pages
 import SeriaMavic from './core/ProductPages/SeriaMavic'
@@ -38,6 +39,7 @@ const Routes = () => {
                 <Route path="/logare/" exact component={Signin}/>
                 <Route path="/inregistrare/" exact component={Signup}/>
                 <Route path="/shop/" exact component={Shop}/>
+                <Route path="/cart/" exact component={Cart}/>
                 <Route path="/produs/:productId" exact component={Product}/>
                 <PrivateRoute path="/cont/" exact component={UserDashboard}/>
                 <AdminRoute path="/cont-admin/" exact component={AdminDashboard}/>

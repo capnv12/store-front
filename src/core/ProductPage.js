@@ -5,6 +5,7 @@ import styled from 'styled-components'
 import ShowImageProduct from './ShowImageProduct'
 import ListGroup from 'react-bootstrap/ListGroup'
 import SmallCard from './SmallCard'
+import {addItem} from './cartHelpers'
 
 const Product = (props) => {
 
@@ -12,6 +13,7 @@ const Product = (props) => {
     const [relatedProduct, setRelatedProduct] = useState([])
     const [error, setError] = useState(false)
     const [resource, setRescoure] = useState()
+    const [redirect, setRedirect] =useState(false)
 
     const loadSingleProduct = productId => {
         readProduct(productId).then(data => {
@@ -38,6 +40,18 @@ const Product = (props) => {
         loadSingleProduct(productId)
     }, [props])
 
+    const addToCart = () => {
+        addItem(product, () => {
+            setRedirect(true)
+            return <div>Produsul a fost adaugat in cos</div>
+        })
+    }
+    const shouldRedirect = redirect => {
+        if(redirect){
+            window.location.reload(); 
+        }
+    }
+
     const isReduced = () => {
         if (product.pretRedus) {
             return (
@@ -45,6 +59,15 @@ const Product = (props) => {
             )
         } else {
             return <Price>{product.pret} lei cu TVA </Price>
+        }
+    }
+
+    const showAdToCart = () => {
+        if(product.pret === null)
+        {
+            return <div></div>
+        }else {
+            return <Button onClick={addToCart}>Adauga in cos</Button>
         }
     }
     const inStoc = () => {
@@ -97,6 +120,7 @@ const Product = (props) => {
         <Layout>
             <Wrapper>
                 <Container className="container">
+                
                     <div className="row mb-5">
                         <div className="col-md-6">
                             <ProductGallery>
@@ -109,7 +133,7 @@ const Product = (props) => {
                             <ShortDescription>
                                 {product.descriereScurta}
                             </ShortDescription>
-                            <Button>Adauga in cos</Button>
+                            {showAdToCart()}
                             {inStoc()}
                         </div>
                         <StyledListGroup>
@@ -128,16 +152,17 @@ const Product = (props) => {
                                 </div>
                             </div>}
                     </div>
-                    <div className="row">
-                        <h4>Produse Legate</h4>
-                        {relatedProduct.map((product, i) => {
+                    <h4>Produse Legate</h4>
+                        <div className="row">
+                        {relatedProduct.slice(0,4).map((product, i) => {
                             return (
                                 <SmallCard key={i} product={product} />
                             )
                         })}
-                    </div>
+                        </div>
                 </Container>
             </Wrapper>
+            {shouldRedirect()}
         </Layout>
     )
 }
