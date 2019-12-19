@@ -159,11 +159,6 @@ const Checkout = ({product, setRun = f => f, run = undefined,lineTotal}) => {
                         <div className="col-lg-4">
                             <Box className="p-4">
 
-                            {product.map((product, i) => {
-                    return(
-                        <CartItems key={i} product={product} cartUpdate={true} showRemoveProductButton={true} run={run} setRun={setRun} lineTotal={lineTotal()}/>
-                    )
-                })}
                             </Box>
                         </div>
                     </div>
