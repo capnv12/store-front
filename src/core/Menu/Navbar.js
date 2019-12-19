@@ -44,7 +44,7 @@ const Navbar = ({ navbarState, handleNavbar, history }) => {
 
             {isAuthenticated() && isAuthenticated().user.role === 1 && (
               <div>
-                <Link to="/cart">Cos<sup>{itemTotal()}</sup></Link>
+                <Link to="/cart"><StyledFontAwesomeIcon icon={faShoppingCart}/>Cos<CartNum>{itemTotal()}</CartNum></Link>
                 <Link  to="/cont">Cont</Link>
                 <Span onClick={() => signout(() => {history.push("/");})}>Dezautentificare</Span>
               </div>
@@ -52,14 +52,14 @@ const Navbar = ({ navbarState, handleNavbar, history }) => {
 
             {isAuthenticated() && isAuthenticated().user.role === 0 && (
               <div>
-                <Link to="/cart">Cos<sup>{itemTotal()}</sup></Link>
+                <Link to="/cart"><StyledFontAwesomeIcon icon={faShoppingCart}/>Cos<CartNum>{itemTotal()}</CartNum></Link>
                 <Link  to="/cont-admin">Cont</Link>
                 <Span onClick={() => signout(() => {history.push("/");})}>Dezautentificare</Span>
               </div>
                 )}
-                
+
           </NavLinks>
-          
+
           <Search/>
           <BurgerWrapper>
             <BurgerMenu

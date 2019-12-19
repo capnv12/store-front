@@ -4,6 +4,11 @@ import Layout from './Layout'
 import { getCart, removeItem } from './cartHelpers'
 import CartItems from './CartItems'
 import styled from 'styled-components'
+import {isAuthenticated} from '../auth/index'
+import Checkout from './Checkout'
+
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faChevronRight} from '@fortawesome/free-solid-svg-icons'
 
 const Cart = ({product,showRemoveProductButton = false}) => {
     const [items, setItems] = useState([])
@@ -29,6 +34,29 @@ const Cart = ({product,showRemoveProductButton = false}) => {
         );
       };
 
+    const getTotal = () => {
+        return(
+            items.reduce((currentValue, nextValue) => {
+                if(nextValue.pretRedus){
+                    return currentValue + nextValue.count * nextValue.pretRedus
+                }else {
+                    return currentValue + nextValue.count * nextValue.pret
+                }
+            },0)
+        )
+    }
+    const lineTotal = () => {
+        return(
+            items.reduce((currentValue, nextValue) => {
+                if(nextValue.pretRedus){
+                    return currentValue + nextValue.count * nextValue.pretRedus
+                }else {
+                    return currentValue + nextValue.count * nextValue.pret
+                }
+            },0)
+        )
+    }
+
     const showItems = (items) => {
         return(
             <Container className="container">
@@ -44,20 +72,25 @@ const Cart = ({product,showRemoveProductButton = false}) => {
                 </CartContainer>
                 {items.map((product, i) => {
                     return(
-                        <CartItems key={i} product={product} cartUpdate={true} showRemoveProductButton={true} run={run} setRun={setRun}/>
+                        <CartItems key={i} product={product} cartUpdate={true} showRemoveProductButton={true} run={run} setRun={setRun} lineTotal={lineTotal()}/>
                     )
                 })}
                 <CartTotal className="row align-items-center">
                     <div className="col-sm-7"></div>
                     <div className="col-sm-5">
-                        Total: <strong>Pret total</strong>
+                        Total: <strong>{getTotal()} </strong> lei cu TVA
                     </div>
                 </CartTotal>
                 <CartTotal className="row align-items-center">
                     <div className="col-sm-5"></div>
                     <div className="col-sm-7">
                         <StyledLinkSilent className="btn" to="/">Mai caut</StyledLinkSilent>
-                        <StyledLink className="btn" to="/">Finalizare Comanda</StyledLink>
+                        {isAuthenticated() ? (
+                            <StyledLink className="btn" to="/checkout">Finalizare Comanda</StyledLink>
+                        ) : (
+                            <StyledLink className="btn" to="/logare">Logheaza-te pentru a finaliza comanda</StyledLink>
+                        )}
+
                     </div>
                 </CartTotal>
             </Container>
@@ -65,7 +98,13 @@ const Cart = ({product,showRemoveProductButton = false}) => {
     }
     const noItems = () => {
         return(
-            <h2>Cosul este gol. <br/> <Link to="/">Continua cumparaturile</Link></h2>
+            <Container className="container">
+                <Subtitle>Continutul cosului</Subtitle>
+                <Alert className="alert alert-primary">Cosul este gol. <Link to="/">Adauga cateva produse<StyledFontAwesomeIcon icon={faChevronRight} /></Link></Alert>
+                <div className="text-center">
+                    <StyledLink className="btn mb-5" to="/">Inapoi la pagina principala</StyledLink>
+                </div>
+            </Container>
         )
     }
     return(
@@ -160,4 +199,17 @@ transition: all .3s;
     color: #fff;
     background-color: #207abd;
     border-color: #207abd;
+`
+const Alert = styled.div`
+    border: 0;
+    border-radius: 0;
+    padding: 15px;
+    margin-bottom: 20px;
+
+    & a {
+        color: #207abd;
+    }
+`
+const StyledFontAwesomeIcon = styled(FontAwesomeIcon)`
+    margin-left:5px;
 `

@@ -7,7 +7,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTrashAlt} from '@fortawesome/free-solid-svg-icons'
 import { updateItem, removeItem } from './cartHelpers'
 
-const CartItems = ({ product, cartUpdate=false, setRun = f => f, run = undefined}) => {
+const CartItems = ({ product, cartUpdate=false, setRun = f => f, run = undefined, lineTotal}) => {
 
     const [count, setCount] = useState(product.count)
 
@@ -43,6 +43,15 @@ const CartItems = ({ product, cartUpdate=false, setRun = f => f, run = undefined
         }
     }
 
+    const getTotal = () => {
+
+        if(product.pretRedus){
+            return product.pretRedus * product.count
+        }else{
+            return product.pret * product.count
+        }
+    }
+
     return (
         <Wrapper className="row align-items-center">
             <div className="col-sm-1">
@@ -56,7 +65,7 @@ const CartItems = ({ product, cartUpdate=false, setRun = f => f, run = undefined
             <input type="number" className="form-control" value={count} onChange={handleChange(product._id)}/>
             </div>
             <div className="col-sm-2">
-                Total
+            {getTotal()} lei cu TVA
             </div>
             <div className="col-sm-1">
                 <FontAwesomeIcon icon={faTrashAlt} onClick={() => {handleRemove(product._id)}}/>

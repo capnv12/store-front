@@ -15,6 +15,7 @@ import Shop from './core/Shop'
 import ScrollToTop from './scrollToTop'
 import Product from './core/ProductPage'
 import Cart from './core/Cart'
+import Checkout from './core/Checkout'
 
 //pages
 import SeriaMavic from './core/ProductPages/SeriaMavic'
@@ -30,6 +31,7 @@ import SeriaPowerVison from './core/ProductPages/SeriaPowerVison.js'
 import Category from './core/CategoryPages/Category'
 
 
+
 const Routes = () => {
     return (
         <BrowserRouter>
@@ -42,6 +44,7 @@ const Routes = () => {
                 <Route path="/cart/" exact component={Cart}/>
                 <Route path="/produs/:productId" exact component={Product}/>
                 <PrivateRoute path="/cont/" exact component={UserDashboard}/>
+                <PrivateRoute path="/checkout/" exact component={Checkout}/>
                 <AdminRoute path="/cont-admin/" exact component={AdminDashboard}/>
                 <AdminRoute path="/categorie/creare/" exact component={AddCategory}/>
                 <AdminRoute path="/produse/creare/" exact component={AddProduct}/>
